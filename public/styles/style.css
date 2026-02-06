@@ -19,7 +19,6 @@ body.modal-open {
   width: 100%;
 }
 
-
 @keyframes blink {
   0%,
   50%,
@@ -773,7 +772,7 @@ button:focus-visible,
   .quit-in-config,
   .quit-in-rules,
   .start-quiz-btn,
-  .restart{
+  .restart {
     width: 132px !important;
     height: 55px !important;
     font-size: large;
@@ -786,39 +785,82 @@ button:focus-visible,
     box-sizing: border-box;
   }
   .start-quiz-btn,
-  .restart{
+  .restart {
     background-color: #007bff;
   }
   .start-quiz-btn:hover,
-  .restart:hover{
+  .restart:hover {
     background-color: blue;
   }
 
   .quit-in-config,
-  .quit-in-rules
-  {
-    background-color:rgb(156, 30, 30);
+  .quit-in-rules {
+    background-color: rgb(156, 30, 30);
   }
   .quit-in-config:hover,
-  .quit-in-rules:hover
-  {
+  .quit-in-rules:hover {
     background-color: red;
   }
-  
-  .result-buttons{
+
+  .result-buttons {
     display: flex !important;
     flex-direction: row;
-
-
   }
-  .result-buttons button{
+  .result-buttons button {
     width: 100px !important;
     padding: 0 !important;
     margin: 0 !important;
     padding: 12px !important;
     height: 50px !important;
   }
+  .history-table-wrapper {
+    overflow-x: auto; /* Ensures horizontal scrolling if the content is wide */
+    margin-bottom: 20px;
+  }
 
+  .history-table {
+    width: 100%; /* Stays within container width */
+    border-collapse: collapse;
+    /* Allows browser to automatically size columns based on content */
+    table-layout: auto;
+    font-size: 0.9rem; /* Slightly larger text than last attempt */
+  }
+
+  /* Ensure all headers have standard names and alignment */
+  .history-table th {
+    background-color: #e9ecef;
+    font-weight: 600;
+    color: #333;
+    text-align: left;
+    padding: 12px 8px;
+    white-space: nowrap; /* Keep headers on a single line */
+    border-bottom: 1px solid #ddd;
+  }
+
+  /* Styling for data cells */
+  .history-table td {
+    padding: 12px 8px;
+    vertical-align: middle;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+    /* Allow data cells to wrap if they are very long */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+
+  /* Align numeric data columns to the right for readability */
+  .history-table td:nth-child(4), /* Score */
+.history-table td:nth-child(5), /* Total Questions */
+.history-table td:nth-child(6) {
+    /* Percentage */
+    text-align: right;
+    white-space: nowrap; /* Keep numbers on one line if possible */
+  }
+
+  .history-list tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
 }
 .quiz-content .answer-option.correct {
   background: #c3e6cb !important;
@@ -828,4 +870,3 @@ button:focus-visible,
   background: #f5c6cb !important;
   color: #721c24 !important;
 }
-
