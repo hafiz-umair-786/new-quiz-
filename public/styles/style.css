@@ -796,7 +796,7 @@ button:focus-visible,
     text-align: center;
   }
   .quiz-container{
-    margin-bottom: 50px;
+    margin-bottom: 75px;
   }
   .quiz-header .quiz-timer {
     width: auto;
@@ -944,9 +944,6 @@ button:focus-visible,
   {
     background-color: #f9f9f9;
   }
-  .info-box{
-    display: block;
-  }
 }
 
 .quiz-content .answer-option.correct {
@@ -958,3 +955,4 @@ button:focus-visible,
   background: #f5c6cb !important;
   color: #721c24 !important;
 }
+
