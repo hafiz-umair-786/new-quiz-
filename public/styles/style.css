@@ -3,6 +3,7 @@
   padding: 0;
   caret-color: transparent;
 }
+
 body {
   padding: 15px;
   box-sizing: border-box;
@@ -13,6 +14,7 @@ body {
   background: #007bff;
   overflow: hidden;
 }
+
 body.modal-open {
   overflow: hidden;
   position: fixed;
@@ -20,11 +22,13 @@ body.modal-open {
 }
 
 @keyframes blink {
+
   0%,
   50%,
   100% {
     opacity: 1;
   }
+
   25%,
   75% {
     opacity: 0.3;
@@ -35,6 +39,7 @@ body.modal-open {
   from {
     width: 0%;
   }
+
   to {
     width: 100%;
   }
@@ -43,6 +48,7 @@ body.modal-open {
 button {
   white-space: nowrap;
 }
+
 .explanation-box {
   margin-top: 15px;
   padding: 12px 15px;
@@ -51,16 +57,19 @@ button {
   border-radius: 6px;
   font-size: 0.95rem;
 }
+
 .blink {
   animation: blink 1s infinite;
   color: red;
   font-weight: 700;
 }
+
 .timer-blink {
   animation-name: blink;
   animation-iteration-count: infinite;
   font-weight: 900;
 }
+
 .progress-bar-container {
   width: 100%;
   height: 5px;
@@ -84,6 +93,7 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .start-btn button {
   font-size: 25px;
   font-weight: 500;
@@ -96,12 +106,14 @@ button {
   cursor: pointer;
   white-space: nowrap;
 }
+
 .info-box {
   display: none;
   width: 540px;
   background-color: white;
   border-radius: 5px;
 }
+
 .info-box .info-title {
   height: 60px;
   width: 100%;
@@ -112,25 +124,29 @@ button {
   font-size: 20px;
   font-weight: 500;
 }
+
 .info-box .info-list {
   padding: 15px 35px;
 }
+
 .info-box .info-list .info {
   margin: 5px 0;
   font-size: 17px;
 }
+
 .info-box .info-list .info span {
   font-weight: 600;
   color: #007bff;
 }
+
 .info-box .buttons {
   height: 60px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 0 35px;
-  border-top: 1px solid lightgrey;
 }
+
 .info-box .buttons button {
   margin: 0 8px;
   height: 42px;
@@ -160,6 +176,7 @@ button {
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
 }
+
 .quit {
   background-color: #ff4d4d;
   color: white;
@@ -178,6 +195,7 @@ button {
 .info-box ul {
   margin-left: 50px;
 }
+
 :where(.config-container, .quiz-container, .result-container) {
   display: none;
   background-color: white;
@@ -185,12 +203,14 @@ button {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.13);
   position: relative;
 }
+
 .config-container {
   display: none;
   width: 415px;
   padding: 25px;
   text-align: center;
 }
+
 .config-container .config-title,
 .quiz-container .quiz-title {
   font-size: 1.31rem;
@@ -199,11 +219,13 @@ button {
 .config-container .config-option {
   margin-top: 25px;
 }
+
 .config-option .option-title {
   font-size: 1.325rem;
   font-weight: 500;
   margin-bottom: 20px;
 }
+
 .config-option button,
 .quit-in-config,
 .quit-in-rules {
@@ -214,25 +236,30 @@ button {
   border-radius: 6px;
   border: 1px solid #5145ba;
 }
+
 .quit-in-config,
 .quit-in-rules,
 .start-quiz-btn,
 .restart {
   width: 100px;
 }
+
 .config-option .category-options {
   display: grid;
   gap: 15px;
   grid-template-columns: repeat(1, 1fr);
 }
+
 .config-option button.active {
   color: white;
   background-color: #1e0cc0;
 }
+
 .config-option button.active:hover {
   color: white;
   background-color: #655f9c;
 }
+
 .config-option .question-options {
   display: flex;
   flex-wrap: wrap;
@@ -240,13 +267,16 @@ button {
   padding: 0 30px;
   justify-content: center;
 }
+
 .config-option button:hover,
 .quiz-content .answer-option:hover {
   background-color: #dad5fd;
 }
+
 .question-options button {
   flex: 1 1 10%;
 }
+
 .open-history-btn,
 .start-quiz-btn,
 .restart,
@@ -266,6 +296,7 @@ button {
     background 0.3s ease,
     border 0.3s ease;
 }
+
 .result-container .quit-in-result {
   width: 100px;
   height: 42px;
@@ -273,32 +304,40 @@ button {
   margin: 0;
   background-color: rgb(138, 26, 26);
 }
+
 .result-container .quit-in-result:hover {
   background-color: rgb(185, 9, 9);
 }
+
 .config-container .start-quiz-btn,
 .restart {
   margin-top: 30px;
 }
+
 .config-container .start-quiz-btn:hover,
 .quiz-footer .next-question-btn:hover,
 .result-container .try-again-btn:hover,
 .info-box .restart:hover {
   background-color: #403795;
 }
+
 .quiz-container {
   width: 480px;
 }
+
 .quiz-header-first-child-div {
   display: flex;
   flex-direction: column;
 }
+
 .quiz-content {
   user-select: none;
 }
+
 .quiz-header-first-child-div h3 {
   margin-top: 10px;
 }
+
 .quiz-container .quiz-header {
   display: flex;
   align-items: center;
@@ -317,6 +356,7 @@ button {
   background-color: blue;
   width: 0%;
 }
+
 .quiz-container .quiz-header.animate-border::after {
   animation: fillTimer 15s linear forwards;
 }
@@ -325,10 +365,12 @@ button {
   font-size: 1.5rem;
   font-weight: 600;
 }
+
 .quiz-header .quiz-title {
   font-size: 1.437rem;
   font-weight: 700;
 }
+
 .quiz-header .quiz-timer {
   display: flex;
   align-items: center;
@@ -342,12 +384,15 @@ button {
   background: #32313c;
   height: 30px;
 }
+
 .quiz-content {
   padding: 20px 25px 25px;
 }
+
 .quiz-content .quiz-timer span {
   font-size: 1.4rem;
 }
+
 .quiz-content .answer-options {
   display: flex;
   flex-direction: column;
@@ -357,6 +402,7 @@ button {
   padding-left: 0;
   margin-left: 0;
 }
+
 .quiz-content .answer-option {
   appearance: none;
   border: none;
@@ -379,16 +425,19 @@ button {
   flex-shrink: 0;
   margin: -4px -3px -4px 12px;
 }
+
 .quiz-content .answer-option.correct {
   border-color: #b7e1c1;
   background: #d4edda;
   color: #155724;
 }
+
 .quiz-content .answer-option.incorrect {
   border-color: #f5c6cb;
   background: #f8d7da;
   color: #721c24;
 }
+
 .quiz-footer {
   padding: 15px 25px;
   display: flex;
@@ -396,6 +445,7 @@ button {
   justify-content: space-between;
   border-top: 1px solid #c6c6c6;
 }
+
 .quiz-footer .next-question-btn,
 .WhyButton {
   display: inline-flex;
@@ -404,22 +454,27 @@ button {
   padding: 9px 17px;
   visibility: visible;
 }
+
 .quiz-footer .next-question-btn:disabled,
 .quiz-footer .WhyButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   background-color: #a098e0;
 }
+
 .quiz-content .answer-option.disabled {
   pointer-events: none;
 }
+
 .quiz-footer .question-status {
   font-weight: 500;
 }
+
 .quiz-footer .question-status b,
 .result-container .result-message b {
   font-weight: 900;
 }
+
 .result-container {
   text-align: center;
   padding: 40px;
@@ -430,26 +485,32 @@ button {
 .result-container .result-img {
   width: 110px;
 }
+
 .result-container .result-title {
   margin-top: 30px;
 }
+
 .result-container .result-message {
   font-size: 1.125rem;
   font-weight: 500;
   margin-top: 15px;
 }
+
 .result-container .try-again-btn {
   margin-top: 30px;
   padding: 12px 20px;
 }
+
 .quiz-content .answer-option.correct:hover {
   background: #d4edda;
   cursor: default;
 }
+
 .quiz-content .answer-option.incorrect:hover {
   background: #f8d7da;
   cursor: default;
 }
+
 .btn-primary {
   color: white;
   border: none;
@@ -465,6 +526,7 @@ button {
 .btn-primary:hover {
   background-color: #403795;
 }
+
 .time-duration {
   display: inline-block;
   margin-top: 10px;
@@ -478,6 +540,7 @@ button {
   animation-iteration-count: infinite;
   animation-duration: 0.5s;
 }
+
 .result-progress-bar {
   width: 100%;
   height: 20px;
@@ -516,12 +579,14 @@ button {
   text-align: center;
   margin-bottom: 15px;
 }
+
 .buttons-of-history {
   display: flex;
   justify-content: center;
   gap: 15px;
   margin-bottom: 15px;
 }
+
 .buttons-of-history button {
   width: fit-content;
 }
@@ -568,12 +633,14 @@ button {
   border: none;
   border-radius: 6px;
 }
+
 .result-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
 }
+
 .result-buttons .open-history-btn {
   display: inline-block;
   margin-bottom: 15px;
@@ -589,6 +656,7 @@ button {
 .history-container.active {
   display: block;
 }
+
 .result-buttons .open-history-btn {
   display: inline-block;
   margin-bottom: 15px;
@@ -622,6 +690,7 @@ button:focus-visible,
   overflow-x: hidden;
   padding-bottom: 10px;
 }
+
 .start-btn button {
   box-shadow:
     inset 0 -2px 0 rgba(0, 0, 0, 0.08),
@@ -645,12 +714,14 @@ button:focus-visible,
     inset 0 -2px 6px rgba(0, 0, 0, 0.12),
     0 6px 12px rgba(0, 0, 0, 0.12);
 }
+
 .quiz-title {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
+
 .back-btn {
   position: absolute;
   top: 12px;
@@ -682,6 +753,7 @@ button:focus-visible,
   justify-content: center;
   text-align: center;
 }
+
 .info-list .info {
   text-align: left;
   font-size: smaller;
@@ -692,9 +764,11 @@ button:focus-visible,
 #option-display-in-quiz {
   font-size: 15px;
 }
+
 .quit-in-rules {
   background-color: #ff4d4d;
 }
+
 .quit-in-rules:hover {
   background-color: red;
 }
@@ -720,6 +794,9 @@ button:focus-visible,
     flex-direction: column;
     gap: 10px;
     text-align: center;
+  }
+  .quiz-container{
+    margin-bottom: 50px;
   }
   .quiz-header .quiz-timer {
     width: auto;
@@ -748,6 +825,7 @@ button:focus-visible,
     width: 95vw;
     padding: 15px;
   }
+
   .action-buttons {
     display: flex;
     justify-content: center;
@@ -757,6 +835,7 @@ button:focus-visible,
   .action-buttons button {
     width: 120px;
   }
+
   .quit-in-config,
   .quit-in-rules {
     background-color: #ff4d4d;
@@ -769,6 +848,7 @@ button:focus-visible,
     background-color: #5145ba;
     color: white;
   }
+
   .quit-in-config,
   .quit-in-rules,
   .start-quiz-btn,
@@ -776,7 +856,8 @@ button:focus-visible,
     width: 132px !important;
     height: 55px !important;
     font-size: large;
-    padding: 0; /* height controls vertical size */
+    padding: 0;
+    /* height controls vertical size */
     font-size: 0.95rem;
     font-weight: 500;
     line-height: 1;
@@ -784,10 +865,12 @@ button:focus-visible,
     text-align: center;
     box-sizing: border-box;
   }
+
   .start-quiz-btn,
   .restart {
     background-color: #007bff;
   }
+
   .start-quiz-btn:hover,
   .restart:hover {
     background-color: blue;
@@ -797,6 +880,7 @@ button:focus-visible,
   .quit-in-rules {
     background-color: rgb(156, 30, 30);
   }
+
   .quit-in-config:hover,
   .quit-in-rules:hover {
     background-color: red;
@@ -806,6 +890,7 @@ button:focus-visible,
     display: flex !important;
     flex-direction: row;
   }
+
   .result-buttons button {
     width: 100px !important;
     padding: 0 !important;
@@ -813,59 +898,62 @@ button:focus-visible,
     padding: 12px !important;
     height: 50px !important;
   }
+
   .history-table-wrapper {
-    overflow-x: auto; /* Ensures horizontal scrolling if the content is wide */
+    overflow-x: auto;
+    /* Ensures horizontal scrolling if the content is wide */
     margin-bottom: 20px;
   }
 
   .history-table {
-    width: 100%; /* Stays within container width */
+    width: 100%;
     border-collapse: collapse;
-    /* Allows browser to automatically size columns based on content */
     table-layout: auto;
-    font-size: 0.9rem; /* Slightly larger text than last attempt */
+    font-size: 0.9rem;
   }
 
-  /* Ensure all headers have standard names and alignment */
   .history-table th {
     background-color: #e9ecef;
     font-weight: 600;
     color: #333;
     text-align: left;
     padding: 12px 8px;
-    white-space: nowrap; /* Keep headers on a single line */
+    white-space: nowrap;
     border-bottom: 1px solid #ddd;
   }
 
-  /* Styling for data cells */
   .history-table td {
     padding: 12px 8px;
     vertical-align: middle;
     border-bottom: 1px solid #ddd;
     color: #555;
-    /* Allow data cells to wrap if they are very long */
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
   }
 
-  /* Align numeric data columns to the right for readability */
-  .history-table td:nth-child(4), /* Score */
-.history-table td:nth-child(5), /* Total Questions */
-.history-table td:nth-child(6) {
-    /* Percentage */
+  .history-table td:nth-child(4),
+  .history-table td:nth-child(5),
+  .history-table td:nth-child(6)
+  {
     text-align: right;
-    white-space: nowrap; /* Keep numbers on one line if possible */
+    white-space: nowrap;
   }
 
-  .history-list tr:nth-child(even) {
+  .history-list tr:nth-child(even)
+  {
     background-color: #f9f9f9;
   }
+  .info-box{
+    display: block;
+  }
 }
+
 .quiz-content .answer-option.correct {
   background: #c3e6cb !important;
   color: #155724 !important;
 }
+
 .quiz-content .answer-option.incorrect {
   background: #f5c6cb !important;
   color: #721c24 !important;
