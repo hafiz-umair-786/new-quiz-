@@ -474,8 +474,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function endQuizForCheating() {
+    timerSound.pause();
+    alertSound.pause();
     clearInterval(timer);
-
     showScreen("RESULT");
 
     resultMessage.innerHTML =
@@ -642,6 +643,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
 
