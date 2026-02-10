@@ -237,9 +237,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
   const highlightCorrect = () => {
-    timerDisplay.classList.remove("timer-blink");
-    timerDisplay.style.color = "white";
-  };
+    answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
+      if (opt.dataset.answer === currentQuestion.correctAnswer) {
+      opt.classList.add("correct"); // highlight correct answer
+      opt.insertAdjacentHTML(
+        "beforeend",
+        `<span class="material-symbols-outlined">check_circle</span>`
+      );
+    }
+  });
+
+  timerDisplay.classList.remove("timer-blink");
+  timerDisplay.style.color = "white";
+};
   const shuffleArray = (array) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -632,5 +642,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
