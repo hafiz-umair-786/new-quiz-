@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   alertSound.volume = 0.5;
   timerSound.volume = 0.5;
-  wrongSound.volume = 0.5;
+  wrongSound.volume = 0.3;
 
   let timer = null;
   let currentTime = QUIZ_TIME_LIMIT;
@@ -643,6 +643,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
 
