@@ -47,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
   timerSound.loop = true;
   correctSound.loop = true;
 
-  
   alertSound.volume = 0.5;
   timerSound.volume = 0.5;
   wrongSound.volume = 0.3;
@@ -121,8 +120,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const renderQuestion = async () => {
-    
-
     try {
       const response = await fetch("/api/quiz/next", {
         method: "POST",
@@ -239,17 +236,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const highlightCorrect = () => {
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
       if (opt.dataset.answer === currentQuestion.correctAnswer) {
-      opt.classList.add("correct"); // highlight correct answer
-      opt.insertAdjacentHTML(
-        "beforeend",
-        `<span class="material-symbols-outlined">check_circle</span>`
-      );
-    }
-  });
+        opt.classList.add("correct"); // highlight correct answer
+        opt.insertAdjacentHTML(
+          "beforeend",
+          `<span class="material-symbols-outlined">check_circle</span>`,
+        );
+      }
+    });
 
-  timerDisplay.classList.remove("timer-blink");
-  timerDisplay.style.color = "white";
-};
+    timerDisplay.classList.remove("timer-blink");
+    timerDisplay.style.color = "white";
+  };
   const shuffleArray = (array) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -344,8 +341,7 @@ document.addEventListener("DOMContentLoaded", () => {
       historyList.innerHTML = `
       <tr>
         <td colspan="6" style="text-align:center;">No history available</td>
-      </tr>
-`;
+      </tr>`;
       return;
     }
 
@@ -353,12 +349,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const row = document.createElement("tr");
 
       row.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${item.date}</td>
-      <td>${item.category}</td>
-      <td>${item.score}</td>
-      <td>${item.total}</td>
-      <td>${item.percent}%</td>
+      <td data-label="Attempt">${index + 1}</td>
+      <td data-label="Date">${item.date}</td>
+      <td data-label="Quiz Category">${item.category}</td>
+      <td data-label="Score">${item.score}</td>
+      <td data-label="Total Questions">${item.total}</td>
+      <td data-label="Percentage">${item.percent}%</td>
     `;
 
       historyList.appendChild(row);
@@ -643,10 +639,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-
-
-
-
-
-
