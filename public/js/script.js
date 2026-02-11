@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const renderQuestion = async () => {
-     whyBtn.style.visibility = "none";
+     whyBtn.style.visibility = "hidden";
     try {
       const response = await fetch("/api/quiz/next", {
         method: "POST",
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Enable Why button only if explanation exists
       
-      whyBtn.style.visibility = currentQuestion.whyCorrect ? "visible" : "none";
+      whyBtn.style.visibility = currentQuestion.whyCorrect ? "visible" :"hidden";
       
 
       // Reset and start timer
@@ -642,5 +642,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
