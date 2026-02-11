@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     disableOptions();
     nextBtn.disabled = false;
     if (currentQuestion.whyCorrect) {
-      whyBtn.style.visibility = "visible";
+      whyBtn.style.display="inline-flex";
     }
 
     if (currentQuestion.whyCorrect) {
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const renderQuestion = async () => {
-    whyBtn.style.visibility = "hidden";
+    whyBtn.style.display="none";
     try {
       const response = await fetch("/api/quiz/next", {
         method: "POST",
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.focus();
     nextBtn.disabled = false;
     if (currentQuestion.whyCorrect) {
-      whyBtn.style.visibility = "visible";
+     whyBtn.style.display="inline-flex";
     }
 
     isAnswered = true;
@@ -644,3 +644,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
