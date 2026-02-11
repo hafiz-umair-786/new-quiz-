@@ -91,7 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
     highlightCorrect();
     disableOptions();
     nextBtn.disabled = false;
-    whyBtn.disabled = !currentQuestion.whyCorrect;
+    whyBtn.style.visibility = "visible";
+
     if (currentQuestion.whyCorrect) {
       explanationBox.style.display = "block";
       explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
@@ -120,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const renderQuestion = async () => {
+     whyBtn.style.visibility = "none";
     try {
       const response = await fetch("/api/quiz/next", {
         method: "POST",
@@ -179,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Enable Why button only if explanation exists
 
-      whyBtn.disabled = true;
+      
 
       // Reset and start timer
       resetTimer();
@@ -190,6 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const handleAnswer = (option) => {
+    whyBtn.style.visibility = currentQuestion.whyCorrect ? "visible" : "none";
     if (option.classList.contains("disabled") || isAnswered) return;
 
     const selectedAnswer = option.dataset.answer;
@@ -204,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(timer);
     nextBtn.focus();
     nextBtn.disabled = false;
-    whyBtn.disabled = false;
+    whyBtn.style.visibility = "visible";
     isAnswered = true;
     quizHeader.classList.remove("animate-border");
     option.insertAdjacentHTML(
@@ -639,3 +642,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
