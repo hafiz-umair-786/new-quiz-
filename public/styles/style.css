@@ -1163,4 +1163,16 @@ button:focus-visible,
   background: #f5c6cb !important;
   color: #721c24 !important;
 }
+   .result-buttons {
+          display: flex !important;
+          flex-direction: row;
+      }
+
+      .result-buttons button {
+          width: 100px !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          padding: 12px !important;
+          height: 50px !important;
+      }
 
