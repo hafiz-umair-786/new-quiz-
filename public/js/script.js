@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   alertSound.volume = 0.5;
   timerSound.volume = 0.5;
   wrongSound.volume = 0.3;
-  document.body.style.backgroundColor = "black";
+  // document.body.style.backgroundColor = "black";
   let timer = null;
   let currentTime = QUIZ_TIME_LIMIT;
   let currentQuestion = null;
@@ -643,6 +643,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
 
