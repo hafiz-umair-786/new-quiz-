@@ -451,7 +451,6 @@ button {
   gap: 5px;
   align-items: center;
   padding: 9px 17px;
-  visibility: visible;
 }
 
 .quiz-footer .next-question-btn:disabled,
@@ -1175,4 +1174,5 @@ button:focus-visible,
           padding: 12px !important;
           height: 50px !important;
       }
+
 
