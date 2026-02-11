@@ -945,18 +945,36 @@ button:focus-visible,
     background-color: #f9f9f9;
   }
 
-  .table-container {
-    overflow-x: auto;
-    /* Enables horizontal scroll when table is wider than screen */
-    -webkit-overflow-scrolling: touch;
-    /* Smooth scrolling on iOS */
-  }
+  /* Container for your table and buttons */
+.quiz-history-container {
+  width: 100%;
+  transition: transform 0.3s ease;
+}
 
-  table {
-    width: 100%;
-    min-width: 600px;
-    border-collapse: collapse;
+/* Only triggers when the phone is held vertically */
+@media screen and (orientation: portrait) {
+  .quiz-history-container {
+    /* Rotates the entire container 90 degrees */
+    transform: rotate(90deg);
+    
+    /* Sets the pivot point to the center */
+    transform-origin: center center;
+    
+    /* Swaps width and height to fit the new orientation */
+    width: 100vh; 
+    height: 100vw;
+    
+    /* Centers it on the screen after rotation */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -50vw;
+    margin-left: -50vh;
+    
+    overflow-y: auto; /* Allows scrolling if the list is long */
   }
+}
+
 }
 
 .quiz-content .answer-option.correct {
@@ -968,3 +986,4 @@ button:focus-visible,
   background: #f5c6cb !important;
   color: #721c24 !important;
 }
+
