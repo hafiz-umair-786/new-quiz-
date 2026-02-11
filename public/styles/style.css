@@ -795,9 +795,11 @@ button:focus-visible,
     gap: 10px;
     text-align: center;
   }
-  .quiz-container{
+
+  .quiz-container {
     margin-bottom: 75px;
   }
+
   .quiz-header .quiz-timer {
     width: auto;
   }
@@ -934,15 +936,26 @@ button:focus-visible,
 
   .history-table td:nth-child(4),
   .history-table td:nth-child(5),
-  .history-table td:nth-child(6)
-  {
+  .history-table td:nth-child(6) {
     text-align: right;
     white-space: nowrap;
   }
 
-  .history-list tr:nth-child(even)
-  {
+  .history-list tr:nth-child(even) {
     background-color: #f9f9f9;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    /* Enables horizontal scroll when table is wider than screen */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+  }
+
+  table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
   }
 }
 
@@ -955,4 +968,3 @@ button:focus-visible,
   background: #f5c6cb !important;
   color: #721c24 !important;
 }
-
