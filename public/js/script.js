@@ -91,7 +91,9 @@ document.addEventListener("DOMContentLoaded", () => {
     highlightCorrect();
     disableOptions();
     nextBtn.disabled = false;
-    whyBtn.style.visibility = "visible";
+    if (currentQuestion.whyCorrect) {
+      whyBtn.style.visibility = "visible";
+    }
 
     if (currentQuestion.whyCorrect) {
       explanationBox.style.display = "block";
@@ -121,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const renderQuestion = async () => {
-     whyBtn.style.visibility = "hidden";
+    whyBtn.style.visibility = "hidden";
     try {
       const response = await fetch("/api/quiz/next", {
         method: "POST",
@@ -180,9 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.disabled = true;
 
       // Enable Why button only if explanation exists
-      
-      whyBtn.style.visibility = currentQuestion.whyCorrect ? "visible" :"hidden";
-      
 
       // Reset and start timer
       resetTimer();
@@ -207,7 +206,10 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(timer);
     nextBtn.focus();
     nextBtn.disabled = false;
-    whyBtn.style.visibility = "visible";
+    if (currentQuestion.whyCorrect) {
+      whyBtn.style.visibility = "visible";
+    }
+
     isAnswered = true;
     quizHeader.classList.remove("animate-border");
     option.insertAdjacentHTML(
@@ -642,6 +644,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-
-
