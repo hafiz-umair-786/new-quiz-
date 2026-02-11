@@ -446,7 +446,7 @@ button {
 }
 
 .quiz-footer .next-question-btn,
-.WhyButton {
+.quiz-footer .WhyButton {
   display: inline-flex;
   gap: 5px;
   align-items: center;
@@ -1174,5 +1174,6 @@ button:focus-visible,
           padding: 12px !important;
           height: 50px !important;
       }
+
 
 
