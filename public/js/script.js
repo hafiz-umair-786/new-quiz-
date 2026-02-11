@@ -180,7 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.disabled = true;
 
       // Enable Why button only if explanation exists
-
+      
+      whyBtn.style.visibility = currentQuestion.whyCorrect ? "visible" : "none";
       
 
       // Reset and start timer
@@ -192,7 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const handleAnswer = (option) => {
-    whyBtn.style.visibility = currentQuestion.whyCorrect ? "visible" : "none";
     if (option.classList.contains("disabled") || isAnswered) return;
 
     const selectedAnswer = option.dataset.answer;
@@ -642,4 +642,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
