@@ -524,7 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isAtTop && touchCurrent > touchStart + 50) {
         e.preventDefault(); // Stop the actual reload
         alert("Refresh is disabled on this page!");
-        alertSound.play()
+        wrongSound.play()
 
         // Reset touchStart so the alert doesn't loop infinitely
         touchStart = 999999;
@@ -553,6 +553,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (e) => {
     if (quizContainer.style.display !== "block") return;
+    
 
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "t") {
       e.preventDefault();
@@ -561,6 +562,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (e.ctrlKey && e.key.toLowerCase() === "r") {
       e.preventDefault();
+      disableReferesh();
       alert("Referesh is not allowed.");
     }
 
@@ -699,4 +701,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
