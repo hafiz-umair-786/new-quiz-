@@ -524,6 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isAtTop && touchCurrent > touchStart + 50) {
         e.preventDefault(); // Stop the actual reload
         alert("Refresh is disabled on this page!");
+        alertSound.play()
 
         // Reset touchStart so the alert doesn't loop infinitely
         touchStart = 999999;
@@ -698,3 +699,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
