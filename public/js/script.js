@@ -124,6 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   const renderQuestion = async () => {
     whyBtn.style.display="none";
+    whyBtn.style.display = "none";
+    explanationBox.style.display = "none";
+    explanationBox.innerHTML = "";
     try {
       const response = await fetch("/api/quiz/next", {
         method: "POST",
@@ -237,6 +240,10 @@ document.addEventListener("DOMContentLoaded", () => {
       disableOptions();
       return;
     }
+    if (currentQuestion.whyCorrect) {
+      whyBtn.style.display = "inline-flex";
+    }
+    
   };
   const highlightCorrect = () => {
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
@@ -409,15 +416,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   nextBtn.addEventListener("click", renderQuestion);
   whyBtn.addEventListener("click", () => {
-    if (!currentQuestion?.whyCorrect) return;
+  if (!currentQuestion?.whyCorrect) return;
 
-    if (explanationBox.style.display === "block") {
-      explanationBox.style.display = "none";
-    } else {
-      explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
-      explanationBox.style.display = "block";
-    }
-  });
+  explanationBox.innerHTML =
+    `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
+
+  explanationBox.style.display = "block";
+});
+
 
   tryAgainBtn.addEventListener("click", resetQuiz);
   quitResultBtn.addEventListener("click", () =>
@@ -644,4 +650,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
