@@ -517,6 +517,13 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       registerCheat("Opening new tabs is not allowed.");
     }
+    
+    if ((e.ctrlKey) && e.key.toLowerCase() === "r") {
+      e.preventDefault();
+      alert("Referesh is not allowed.");
+    }
+    
+    
     const active = document.activeElement;
 
     // ---- K/J navigation ----
@@ -652,3 +659,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
