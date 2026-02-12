@@ -428,7 +428,6 @@ document.addEventListener("DOMContentLoaded", () => {
       explanationBox.style.display = "none";
     }
   });
-  
 
   tryAgainBtn.addEventListener("click", resetQuiz);
   quitResultBtn.addEventListener("click", () =>
@@ -498,11 +497,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tryAgainBtn.focus();
   }
-  
+
   function showWarning(message) {
     alert(message); // later you can replace with toast
   }
-  
+
+  let touchStart = 0;
+
+  // 1. Record where the touch starts
+  document.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStart = e.touches[0].pageY;
+    },
+    { passive: false },
+  );
+
+  // 2. Detect the downward pull
+  document.addEventListener(
+    "touchmove",
+    (e) => {
+      const touchCurrent = e.touches[0].pageY;
+      const isAtTop = window.scrollY === 0;
+
+      // If pulling down while at the top of the page
+      if (isAtTop && touchCurrent > touchStart + 50) {
+        e.preventDefault(); // Stop the actual reload
+        alert("Refresh is disabled on this page!");
+
+        // Reset touchStart so the alert doesn't loop infinitely
+        touchStart = 999999;
+      }
+    },
+    { passive: false },
+  );
 
   setupConfigOptions();
   // Get all focusable elements on the page dynamically
@@ -515,13 +543,12 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   };
   function disableRefresh() {
-    document.documentElement.style.overscrollBehaviorY = 'none';
-}
+    document.documentElement.style.overscrollBehaviorY = "none";
+  }
 
-function enableRefresh() {
-    document.documentElement.style.overscrollBehaviorY = 'auto';
-}
-
+  function enableRefresh() {
+    document.documentElement.style.overscrollBehaviorY = "auto";
+  }
 
   document.addEventListener("keydown", (e) => {
     if (quizContainer.style.display !== "block") return;
@@ -530,14 +557,12 @@ function enableRefresh() {
       e.preventDefault();
       registerCheat("Opening new tabs is not allowed.");
     }
-    
-    if ((e.ctrlKey) && e.key.toLowerCase() === "r") {
+
+    if (e.ctrlKey && e.key.toLowerCase() === "r") {
       e.preventDefault();
       alert("Referesh is not allowed.");
-     
     }
-    
-    
+
     const active = document.activeElement;
 
     // ---- K/J navigation ----
@@ -673,5 +698,3 @@ function enableRefresh() {
     });
   });
 });
-
-
