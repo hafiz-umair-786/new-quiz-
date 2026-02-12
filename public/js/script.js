@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     disableOptions();
     nextBtn.disabled = false;
     if (currentQuestion.whyCorrect) {
-      whyBtn.style.display="inline-flex";
+      whyBtn.style.display = "inline-flex";
     }
 
     if (currentQuestion.whyCorrect) {
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   const renderQuestion = async () => {
-    whyBtn.style.display="none";
+    whyBtn.style.display = "none";
     whyBtn.style.display = "none";
     explanationBox.style.display = "none";
     explanationBox.innerHTML = "";
@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.focus();
     nextBtn.disabled = false;
     if (currentQuestion.whyCorrect) {
-     whyBtn.style.display="inline-flex";
+      whyBtn.style.display = "inline-flex";
     }
 
     isAnswered = true;
@@ -243,7 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentQuestion.whyCorrect) {
       whyBtn.style.display = "inline-flex";
     }
-    
   };
   const highlightCorrect = () => {
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
@@ -415,15 +414,18 @@ document.addEventListener("DOMContentLoaded", () => {
     startBtn.focus();
   });
   nextBtn.addEventListener("click", renderQuestion);
+  // Toggle explanation visibility when button is clicked
   whyBtn.addEventListener("click", () => {
-  if (!currentQuestion?.whyCorrect) return;
-
-  explanationBox.innerHTML =
-    `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
-
-  explanationBox.style.display = "block";
-});
-
+    if (
+      explanationBox.style.display === "none" ||
+      explanationBox.style.display === ""
+    ) {
+      explanationBox.style.display = "block";
+      explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
+    } else {
+      explanationBox.style.display = "none";
+    }
+  });
 
   tryAgainBtn.addEventListener("click", resetQuiz);
   quitResultBtn.addEventListener("click", () =>
@@ -650,5 +652,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-
