@@ -274,6 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
   const startQuiz = () => {
+    disableRefresh();
     askedQuestions.length = 0;
     cheatCount = 0;
     showScreen("QUIZ");
@@ -295,6 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const showResult = () => {
+    enableRefresh();
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
     openHistoryBtn.style.display = "inline-block";
 
@@ -426,6 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
       explanationBox.style.display = "none";
     }
   });
+  
 
   tryAgainBtn.addEventListener("click", resetQuiz);
   quitResultBtn.addEventListener("click", () =>
@@ -495,9 +498,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tryAgainBtn.focus();
   }
+  
   function showWarning(message) {
     alert(message); // later you can replace with toast
   }
+  
 
   setupConfigOptions();
   // Get all focusable elements on the page dynamically
@@ -509,6 +514,14 @@ document.addEventListener("DOMContentLoaded", () => {
       (el) => !el.disabled && el.offsetParent !== null,
     );
   };
+  function disableRefresh() {
+    document.documentElement.style.overscrollBehaviorY = 'none';
+}
+
+function enableRefresh() {
+    document.documentElement.style.overscrollBehaviorY = 'auto';
+}
+
 
   document.addEventListener("keydown", (e) => {
     if (quizContainer.style.display !== "block") return;
@@ -521,6 +534,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if ((e.ctrlKey) && e.key.toLowerCase() === "r") {
       e.preventDefault();
       alert("Referesh is not allowed.");
+     
     }
     
     
@@ -659,4 +673,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
