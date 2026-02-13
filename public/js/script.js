@@ -466,6 +466,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // code for cheat detection and handling
   function registerCheat(reason) {
     if (quizContainer.style.display !== "block") return;
+    wrongSound.pause()
+    alertSound.pause()
+    timerSound.pause()
 
     cheatCount++;
     showWarning(`⚠️ Warning ${cheatCount}/${MAX_CHEATS}\n${reason}`);
