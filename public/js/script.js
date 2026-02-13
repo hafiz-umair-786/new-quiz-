@@ -174,7 +174,8 @@ document.addEventListener("DOMContentLoaded", () => {
           handleAnswer(li);
         });
         li.addEventListener("click", () => {
-          li.classList.add("active");
+          answerOptions.querySelector(".active")?.classList.remove("active");
+          
         });
 
         answerOptions.appendChild(li);
@@ -704,6 +705,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
 
