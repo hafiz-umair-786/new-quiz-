@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const quizContainer = document.querySelector(".quiz-container");
   const quizHeader = quizContainer.querySelector(".quiz-header");
+
+  
   const questionText = quizContainer.querySelector(".question-text");
   const answerOptions = quizContainer.querySelector(".answer-options");
   const nextBtn = quizContainer.querySelector(".next-question-btn");
@@ -701,6 +703,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
 
