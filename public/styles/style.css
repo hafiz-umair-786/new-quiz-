@@ -1181,3 +1181,10 @@ button:focus-visible,
     height: 50px !important;
 }
 
+.selected{
+    backgroundColor:blue;
+    color:white;
+}
+    
+
+
