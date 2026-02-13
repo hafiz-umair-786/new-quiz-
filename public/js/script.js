@@ -297,6 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const showResult = () => {
     enableRefresh();
+
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
     openHistoryBtn.style.display = "inline-block";
 
@@ -308,6 +309,8 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (percent >= 80) grade = "<b>B</b> Good!";
     else if (percent >= 70) grade = "<b>C</b> Fair!";
     else if (percent >= 60) grade = "<b>D</b> Needs practice!";
+    else if (percent >= 40)
+      grade = "<b>D</b> You need much more practice! Do not feel demotivated";
     else grade = "<b>F</b> Try again!";
     scoreMessage.innerHTML = `Grade: ${grade}`;
     requestAnimationFrame(() => {
@@ -504,7 +507,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let touchStart = 0;
 
-  // 1. Record where the touch starts
+  // 1. Record where the touch start
+  // 
+
   document.addEventListener(
     "touchstart",
     (e) => {
@@ -517,14 +522,15 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener(
     "touchmove",
     (e) => {
+      if (quizContainer.style.display !== "block") return;
       const touchCurrent = e.touches[0].pageY;
       const isAtTop = window.scrollY === 0;
 
       // If pulling down while at the top of the page
       if (isAtTop && touchCurrent > touchStart + 50) {
         e.preventDefault(); // Stop the actual reload
-        alert("Refresh is disabled on this page!");
         wrongSound.play();
+        alert("Refresh is disabled on this page!");
 
         // Reset touchStart so the alert doesn't loop infinitely
         touchStart = 999999;
@@ -534,7 +540,6 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   setupConfigOptions();
-  // Get all focusable elements on the page dynamically
   const getFocusableElements = () => {
     const elements = document.querySelectorAll(
       "button, [tabindex]:not([tabindex='-1']), .answer-option, .category-option, .question-option",
