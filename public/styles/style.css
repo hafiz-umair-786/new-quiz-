@@ -1183,9 +1183,10 @@ button:focus-visible,
 
 .selected{
     background-color: blue;
-    color:white;
+    color: #007bff;
 }
     
+
 
 
 
