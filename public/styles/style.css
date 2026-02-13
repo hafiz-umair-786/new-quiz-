@@ -1182,9 +1182,10 @@ button:focus-visible,
 }
 
 .selected{
-    backgroundColor:blue;
+    background-color: blue;
     color:white;
 }
     
+
 
 
