@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoBox = document.querySelector(".info-box");
   const exitRulesBtn = infoBox.querySelector(".quit-in-rules");
   const continueBtn = infoBox.querySelector(".restart");
+  
 
   const configContainer = document.querySelector(".config-container");
   const exitConfigBtn = configContainer.querySelector(".quit-in-config");
@@ -700,6 +701,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
 
