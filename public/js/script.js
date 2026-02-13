@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoBox = document.querySelector(".info-box");
   const exitRulesBtn = infoBox.querySelector(".quit-in-rules");
   const continueBtn = infoBox.querySelector(".restart");
-  
 
   const configContainer = document.querySelector(".config-container");
   const exitConfigBtn = configContainer.querySelector(".quit-in-config");
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const quizContainer = document.querySelector(".quiz-container");
   const quizHeader = quizContainer.querySelector(".quiz-header");
 
-  
   const questionText = quizContainer.querySelector(".question-text");
   const answerOptions = quizContainer.querySelector(".answer-options");
   const nextBtn = quizContainer.querySelector(".next-question-btn");
@@ -526,7 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isAtTop && touchCurrent > touchStart + 50) {
         e.preventDefault(); // Stop the actual reload
         alert("Refresh is disabled on this page!");
-        wrongSound.play()
+        wrongSound.play();
 
         // Reset touchStart so the alert doesn't loop infinitely
         touchStart = 999999;
@@ -555,7 +553,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (e) => {
     if (quizContainer.style.display !== "block") return;
-    
 
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "t") {
       e.preventDefault();
@@ -564,7 +561,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (e.ctrlKey && e.key.toLowerCase() === "r") {
       e.preventDefault();
-      disableReferesh();
+      disableRefresh();
       alert("Referesh is not allowed.");
     }
 
@@ -703,12 +700,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-
-
-
-
-
-
-
-
