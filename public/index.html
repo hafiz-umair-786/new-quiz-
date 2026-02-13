@@ -1,149 +1,164 @@
-<!doctype html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quiz</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">    
-  <link rel="stylesheet" href="styles/style.css" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <link rel="manifest" href="images/site.webmanifest"> 
-</head>
-<body>
-  <div class="start-btn">
-    <button>Start Quiz</button>
-  </div>
-  <div class="sections info-box">
-    <button class="back-btn">←</button>
-    <div class="info-title">
-      <span>Some Rules of This Quiz</span>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+    <link rel="manifest" href="images/site.webmanifest" />
+  </head>
+  <body style="background-color: yellow;">
+    <div class="start-btn">
+      <button>Start Quiz</button>
     </div>
-    <div class="info-list">
-      <div class="info">01. You will have only <span>15</span> seconds for each question.</div>
-      <div class="info">02. Once you select an option, you can't change it.</div>
-      <div class="info">03. You cannot select any option once the time is up.</div>
-      <div class="info">04. You can't exit the quiz while you are playing.</div>
-      <div>
-        <dl>
-          <dt>05. Grade rules</dt>
-          <dd>
-            <ul>
-              <li>A for 90%-100% Score</li>
-              <li>B for 80%-89%  Score</li>
-              <li>C for 70%-79%  Score</li>
-              <li>D for 60%-69%  Score</li>
-              <li>F for  0%-59%   Score</li>
-            </ul>
-          </dd>
-        </dl>
+    <div class="sections info-box">
+      <button class="back-btn">←</button>
+      <div class="info-title">
+        <span>Some Rules of This Quiz</span>
+      </div>
+      <div class="info-list">
+        <div class="info">
+          01. You will have only <span>15</span> seconds for each question.
+        </div>
+        <div class="info">
+          02. Once you select an option, you can't change it.
+        </div>
+        <div class="info">
+          03. You cannot select any option once the time is up.
+        </div>
+        <div class="info">
+          04. You can't exit the quiz while you are playing.
+        </div>
+        <div>
+          <dl>
+            <dt>05. Grade rules</dt>
+            <dd>
+              <ul>
+                <li>A for 90%-100% Score</li>
+                <li>B for 80%-89% Score</li>
+                <li>C for 70%-79% Score</li>
+                <li>D for 60%-69% Score</li>
+                <li>F for 0%-59% Score</li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="quit-in-rules">Exit Quiz</button>
+        <button class="restart">Continue</button>
       </div>
     </div>
-    <div class="buttons">
-      <button class="quit-in-rules">Exit Quiz</button>
-      <button class="restart">Continue</button>
-    </div>
-  </div>
-  <div class="sections config-container">
-    <button class="back-btn">←</button>
-    <h2 class="config-title">Quiz configuration</h2>
-    <div class="config-option">
-      <h4 class="option-title">Select Chapter</h4>
-      <div class="category-options">
-        <button id="Chapter_no_1" class="category-option active">Python</button>
-        <button id="Chapter_no_2" class="category-option">HTML</button>
-        <button id="Chapter_no_3" class="category-option">CSS</button>
-        <button id="Chapter_no_4" class="category-option">javascript</button>
-        <button id="Chapter_no_5" class="category-option">Computer Basics</button>
+    <div class="sections config-container">
+      <button class="back-btn">←</button>
+      <h2 class="config-title">Quiz configuration</h2>
+      <div class="config-option">
+        <h4 class="option-title">Select Chapter</h4>
+        <div class="category-options">
+          <button id="Chapter_no_1" class="category-option active">
+            Python
+          </button>
+          <button id="Chapter_no_2" class="category-option">HTML</button>
+          <button id="Chapter_no_3" class="category-option">CSS</button>
+          <button id="Chapter_no_4" class="category-option">javascript</button>
+          <button id="Chapter_no_5" class="category-option">
+            Computer Basics
+          </button>
+        </div>
+      </div>
+      <div class="config-option">
+        <h4 class="option-title">No of question</h4>
+        <div class="question-options">
+          <button class="question-option">5</button>
+          <button class="question-option">10</button>
+          <button class="question-option">15</button>
+          <button class="question-option active">17</button>
+          <button class="question-option">20</button>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="quit quit-in-config">Exit?</button>
+        <button class="start-quiz-btn">Ready?</button>
       </div>
     </div>
-    <div class="config-option">
-      <h4 class="option-title">No of question</h4>
-      <div class="question-options">
-        <button class="question-option"> 5</button>
-        <button class="question-option">10</button>
-        <button class="question-option">15</button>
-        <button class="question-option active">17</button>
-        <button class="question-option">20</button>
+    <div class="sections quiz-container" style="display: none">
+      <header class="quiz-header">
+        <div class="quiz-header-first-child-div">
+          <h2 class="quiz-title">Quiz Application</h2>
+          <h3 id="option-display-in-quiz">Chapter</h3>
+        </div>
+        <div class="quiz-timer">
+          <span class="material-symbols-outlined">timer</span>
+          <p class="time-duration">15s</p>
+        </div>
+      </header>
+      <div class="quiz-content">
+        <h1 class="question-text"></h1>
+        <ul class="answer-options"></ul>
+        <div class="explanation-box" style="display: none"></div>
+      </div>
+      <div class="quiz-footer">
+        <p class="question-status"></p>
+        <button class="WhyButton">Confused?</button>
+        <button disabled class="next-question-btn">
+          Next<span class="material-symbols-outlined">arrow_right_alt</span>
+        </button>
       </div>
     </div>
-    <div class="buttons">
-      <button class="quit quit-in-config">Exit?</button>
-      <button class="start-quiz-btn">Ready?</button>
-    </div>
-  </div>
-  <div class="sections quiz-container" style="display: none">      
-    <header class="quiz-header">
-      <div class="quiz-header-first-child-div">
-        <h2 class="quiz-title">Quiz Application</h2>
-        <h3 id="option-display-in-quiz">Chapter</h3>
+    <div class="sections result-container">
+      <button class="back-btn">←</button>
+      <h2 class="result-title">Quiz completed</h2>
+      <p class="result-message">
+        You answered <b>7</b> out of <b>10</b> questions correctly
+      </p>
+      <p class="score"></p>
+      <div class="result-progress-bar">
+        <div class="result-progress-fill"></div>
       </div>
-      <div class="quiz-timer">
-        <span class="material-symbols-outlined">timer</span>
-        <p class="time-duration">15s</p>
+      <div class="result-buttons">
+        <button class="open-history-btn">History</button>
+        <button class="try-again-btn">Try Again</button>
+        <button class="quit-in-result">Exit App?</button>
       </div>
-    </header>
-    <div class="quiz-content">
-      <h1 class="question-text"></h1>
-      <ul class="answer-options"></ul>
-      <div class="explanation-box" style="display: none"></div>
     </div>
-    <div class="quiz-footer">
-      <p class="question-status"></p>
-      <button class="WhyButton">Confused?</button>
-      <button disabled class="next-question-btn">Next<span class="material-symbols-outlined">arrow_right_alt</span></button>
+    <div class="history-container">
+      <button class="back-btn">←</button>
+      <h2 class="history-title">Quiz History</h2>
+      <div class="history-table-wrapper">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Attempt</th>
+              <th>Date</th>
+              <th>Quiz Category</th>
+              <th>Score</th>
+              <th>Total Questions</th>
+              <th>Percentage</th>
+            </tr>
+          </thead>
+          <tbody class="history-list"></tbody>
+        </table>
+      </div>
+      <div class="buttons-of-history">
+        <button class="quit delete-history">Reset History</button>
+        <button class="close-history-btn start-quiz-btn">Close</button>
+      </div>
     </div>
-  </div>
-  <div class="sections result-container">
-    <button class="back-btn">←</button>
-    <h2 class="result-title">Quiz completed</h2>
-    <p class="result-message">You answered <b>7</b> out of <b>10</b> questions correctly</p>
-    <p class="score"></p>
-    <div class="result-progress-bar">
-      <div class="result-progress-fill"></div>
-    </div>
-    <div class="result-buttons">
-      <button class="open-history-btn">History</button>
-      <button class="try-again-btn">Try Again</button>
-      <button class="quit-in-result">Exit App?</button>
-    </div>
-  </div>
-  <div class="history-container">
-    <button class="back-btn">←</button>
-    <h2 class="history-title">Quiz History</h2>
-    <div class="history-table-wrapper">
-      <table class="history-table">
-        
-
-        <thead>
-          <tr>
-            <th>Attempt</th>
-            <th>Date</th>
-            <th>Quiz Category</th>
-            <th>Score</th>
-            <th>Total Questions</th>
-            <th>Percentage</th>
-          </tr>
-        </thead>
-        <tbody class="history-list"></tbody>
-      </table>
-    </div>
-    <div class="buttons-of-history">
-      <button class="quit delete-history">Reset History</button>
-      <button class="close-history-btn start-quiz-btn">Close</button>
-    </div>
-  </div>
-  <script src="js/questions.js"></script>
-  <script src="js/script.js"></script>
-
-</body></html><!-- approaches of  why correct button  --><!-- show if user enter correct answer --><!-- show if user enter wrong answer --><!-- show on both (user enter any answer correct or wrong) --><!-- show button for each why it is correct and why it is wrong --><!-- result flow --><!-- same as now --><!-- ==OR== --><!-- show all the questions and answers in the result section and tell the result at the end with each question of an option why user selected is wrong or right--> 
-
-
-
-
-
-
-
-
-
+    <script src="js/questions.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
+<!-- approaches of  why correct button  --><!-- show if user enter correct answer --><!-- show if user enter wrong answer --><!-- show on both (user enter any answer correct or wrong) --><!-- show button for each why it is correct and why it is wrong --><!-- result flow --><!-- same as now --><!-- ==OR== --><!-- show all the questions and answers in the result section and tell the result at the end with each question of an option why user selected is wrong or right-->
