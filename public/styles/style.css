@@ -253,6 +253,10 @@ button {
     color: white;
     background-color: #1e0cc0;
 }
+.active {
+    color: white;
+    background-color: #1e0cc0;
+}
 
 .config-option button.active:hover {
     color: white;
@@ -1176,3 +1180,4 @@ button:focus-visible,
     padding: 12px !important;
     height: 50px !important;
 }
+
