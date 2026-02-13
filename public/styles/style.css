@@ -242,7 +242,6 @@ button {
 .restart {
     width: 100px;
 }
-
 .config-option .category-options {
     display: grid;
     gap: 15px;
@@ -253,16 +252,10 @@ button {
     color: white;
     background-color: #1e0cc0;
 }
-.active {
-    color: white;
-    background-color: #1e0cc0;
-}
-
 .config-option button.active:hover {
     color: white;
     background-color: #655f9c;
 }
-
 .config-option .question-options {
     display: flex;
     flex-wrap: wrap;
@@ -1182,10 +1175,13 @@ button:focus-visible,
 }
 
 .selected{
-    background-color: blue;
-    color: #007bff;
+    color: white;
+    background-color: #1e0cc0;
 }
-    
+.selected:hover {
+    color: white;
+    background-color: #655f9c;
+}
 
 
 
