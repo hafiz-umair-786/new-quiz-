@@ -174,9 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
           handleAnswer(li);
         });
         li.addEventListener("click", () => {
-          answerOptions.querySelector("selected")?.classList.remove("selected");
-          
-        });
+            answerOptions.querySelector(".selected")?.classList.remove("selected");li.classList.add("selected");
+          });
+
 
         answerOptions.appendChild(li);
       });
@@ -705,6 +705,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
 
