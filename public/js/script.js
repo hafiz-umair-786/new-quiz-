@@ -168,16 +168,11 @@ document.addEventListener("DOMContentLoaded", () => {
         li.dataset.answer = opt;
         li.classList.add("answer-option");
 
-        li.addEventListener("dblclick", () => {
+        li.addEventListener("click", () => {
           answerOptions.querySelector(".active")?.classList.remove("active");
           li.classList.add("active");
           handleAnswer(li);
         });
-        li.addEventListener("click", () => {
-            answerOptions.querySelector(".selected")?.classList.remove("selected");li.classList.add("selected");
-          });
-
-
         answerOptions.appendChild(li);
       });
 
@@ -705,6 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
 
 
 
