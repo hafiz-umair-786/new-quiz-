@@ -239,47 +239,31 @@ document.addEventListener("DOMContentLoaded", () => {
       osc.stop(ctx.currentTime + 0.6);
     });
   }
-
-  const handleAnswer = (option) => {
+  handleAnswer = (option) => {
     if (option.classList.contains("disabled") || isAnswered) return;
-
     const selectedAnswer = option.dataset.answer;
-    const correct = selectedAnswer === currentQuestion.correctAnswer;
-
-    try {
-      SoundManager.stopAll();
-    } catch (err) {
-      console.log("timerSound.pause() error:", err);
-    }
+    const correct =
+      selectedAnswer.trim() === currentQuestion.correctAnswer.trim();
+    SoundManager.stopAll();
     clearInterval(timer);
-    nextBtn.focus();
     nextBtn.disabled = false;
-    if (currentQuestion.whyCorrect) {
-      whyBtn.style.display = "inline-flex";
-    }
-
+    nextBtn.focus();
     isAnswered = true;
-    quizHeader.classList.remove("animate-border");
     option.insertAdjacentHTML(
       "beforeend",
-      `<span class="material-symbols-outlined">${
-        correct ? "check_circle" : "cancel"
-      }</span>`,
+      <span class="material-symbols-outlined">
+        ${correct ? "check_circle" : "cancel"}
+      </span>,
     );
-
     option.classList.add(correct ? "correct" : "incorrect");
-
     if (correct) {
       playCorrectSound();
       correctCount++;
       disableOptions();
-    } else if (!correct) {
-      SoundManager.play("wrong").catch((error) => {
-        console.log("Wrong sound autoplay blocked.");
-      });
+    } else {
+      SoundManager.play("wrong");
       highlightCorrect();
       disableOptions();
-      return;
     }
     if (currentQuestion.whyCorrect) {
       whyBtn.style.display = "inline-flex";
@@ -287,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const highlightCorrect = () => {
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
-      if (opt.dataset.answer === currentQuestion.correctAnswer) {
+      if (opt.dataset.answer.trim() === currentQuestion.correctAnswer.trim()) {
         opt.classList.add("correct");
         opt.insertAdjacentHTML(
           "beforeend",
@@ -299,6 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
     timerDisplay.classList.remove("timer-blink");
     timerDisplay.style.color = "white";
   };
+
   const shuffleArray = (array) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
