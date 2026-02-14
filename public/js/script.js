@@ -212,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       resetTimer();
       startTimer();
+      SoundManager.play("timer")
     } catch (err) {
       console.error("Error fetching next question:", err);
       alert("Failed to load question. Check your server.");
@@ -269,6 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
   const highlightCorrect = () => {
+    SoundManager.stopAll()
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
       if (opt.dataset.answer.trim() === currentQuestion.correctAnswer.trim()) {
         opt.classList.add("correct");
