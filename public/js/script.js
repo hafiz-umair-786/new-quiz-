@@ -322,6 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const showResult = () => {
+    
     enableRefresh();
 
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
