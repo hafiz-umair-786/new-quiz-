@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const infoBox = document.querySelector(".info-box");
   const exitRulesBtn = infoBox.querySelector(".quit-in-rules");
   const continueBtn = infoBox.querySelector(".restart");
-  
 
   const configContainer = document.querySelector(".config-container");
   const exitConfigBtn = configContainer.querySelector(".quit-in-config");
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const quizContainer = document.querySelector(".quiz-container");
   const quizHeader = quizContainer.querySelector(".quiz-header");
 
-  
   const questionText = quizContainer.querySelector(".question-text");
   const answerOptions = quizContainer.querySelector(".answer-options");
   const nextBtn = quizContainer.querySelector(".next-question-btn");
@@ -40,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const QUIZ_TIME_LIMIT = 15;
   const MAX_CHEATS = 3;
-  const correctSound = new Audio("audio/correct-answer.mp3");
   const alertSound = new Audio("audio/alert.mp3");
   const timerSound = new Audio("audio/timer.mp3");
   const wrongSound = new Audio(
@@ -48,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   alertSound.loop = true;
   timerSound.loop = true;
-  correctSound.loop = true;
 
   alertSound.volume = 0.5;
   timerSound.volume = 0.5;
@@ -88,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }, 1000);
   };
+
   const handleTimeUp = () => {
     isAnswered = true;
     clearInterval(timer);
@@ -228,9 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (correct) {
       // play correct sound
-      correctSound.play().catch((error) => {
-        console.log("Correct sound autoplay blocked.");
-      });
+      playCorrectSound()
       correctCount++;
       disableOptions();
     } else if (!correct) {
@@ -299,6 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const showResult = () => {
     enableRefresh();
+
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
     openHistoryBtn.style.display = "inline-block";
 
@@ -310,6 +306,8 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (percent >= 80) grade = "<b>B</b> Good!";
     else if (percent >= 70) grade = "<b>C</b> Fair!";
     else if (percent >= 60) grade = "<b>D</b> Needs practice!";
+    else if (percent >= 40)
+      grade = "<b>D</b> You need much more practice! Do not feel demotivated";
     else grade = "<b>F</b> Try again!";
     scoreMessage.innerHTML = `Grade: ${grade}`;
     requestAnimationFrame(() => {
@@ -465,6 +463,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // code for cheat detection and handling
   function registerCheat(reason) {
     if (quizContainer.style.display !== "block") return;
+    wrongSound.pause();
+    alertSound.pause();
+    timerSound.pause();
 
     cheatCount++;
     showWarning(`⚠️ Warning ${cheatCount}/${MAX_CHEATS}\n${reason}`);
@@ -506,7 +507,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let touchStart = 0;
 
-  // 1. Record where the touch starts
+  // 1. Record where the touch start
+  //
+
   document.addEventListener(
     "touchstart",
     (e) => {
@@ -519,14 +522,15 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener(
     "touchmove",
     (e) => {
+      if (quizContainer.style.display !== "block") return;
       const touchCurrent = e.touches[0].pageY;
       const isAtTop = window.scrollY === 0;
 
       // If pulling down while at the top of the page
       if (isAtTop && touchCurrent > touchStart + 50) {
         e.preventDefault(); // Stop the actual reload
+        wrongSound.play();
         alert("Refresh is disabled on this page!");
-        wrongSound.play()
 
         // Reset touchStart so the alert doesn't loop infinitely
         touchStart = 999999;
@@ -536,7 +540,32 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   setupConfigOptions();
-  // Get all focusable elements on the page dynamically
+  function playCorrectSound() {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc1.type = "triangle";
+    osc2.type = "triangle";
+
+    osc1.frequency.setValueAtTime(500, ctx.currentTime);
+    osc2.frequency.setValueAtTime(800, ctx.currentTime + 0.1);
+
+    gain.gain.setValueAtTime(0.25, ctx.currentTime);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc1.start();
+    osc2.start(ctx.currentTime + 0.1);
+
+    osc1.stop(ctx.currentTime + 0.2);
+    osc2.stop(ctx.currentTime + 0.3);
+  }
+
   const getFocusableElements = () => {
     const elements = document.querySelectorAll(
       "button, [tabindex]:not([tabindex='-1']), .answer-option, .category-option, .question-option",
@@ -555,7 +584,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (e) => {
     if (quizContainer.style.display !== "block") return;
-    
 
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "t") {
       e.preventDefault();
@@ -564,7 +592,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (e.ctrlKey && e.key.toLowerCase() === "r") {
       e.preventDefault();
-      disableReferesh();
+      disableRefresh();
       alert("Referesh is not allowed.");
     }
 
@@ -664,7 +692,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("contextmenu", (e) => {
     if (quizContainer.style.display === "block") {
       e.preventDefault();
-      registerCheat("Right-click is disabled during the quiz.");
+      alert("Right-click is disabled during the quiz.");
     }
   });
 
@@ -703,12 +731,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-
-
-
-
-
-
-
-
