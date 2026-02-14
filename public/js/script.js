@@ -225,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (correct) {
       // play correct sound
-      playCorrectSound()
+      playCorrectSound();
       correctCount++;
       disableOptions();
     } else if (!correct) {
@@ -543,27 +543,23 @@ document.addEventListener("DOMContentLoaded", () => {
   function playCorrectSound() {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
-    const osc1 = ctx.createOscillator();
-    const osc2 = ctx.createOscillator();
     const gain = ctx.createGain();
-
-    osc1.type = "triangle";
-    osc2.type = "triangle";
-
-    osc1.frequency.setValueAtTime(500, ctx.currentTime);
-    osc2.frequency.setValueAtTime(800, ctx.currentTime + 0.1);
-
-    gain.gain.setValueAtTime(0.25, ctx.currentTime);
-
-    osc1.connect(gain);
-    osc2.connect(gain);
     gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
 
-    osc1.start();
-    osc2.start(ctx.currentTime + 0.1);
+    const notes = [523.25, 659.25, 783.99];
+    // C5 → E5 → G5 (happy major chord)
 
-    osc1.stop(ctx.currentTime + 0.2);
-    osc2.stop(ctx.currentTime + 0.3);
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
+      osc.connect(gain);
+      osc.start(ctx.currentTime + i * 0.1);
+      osc.stop(ctx.currentTime + 0.6);
+    });
   }
 
   const getFocusableElements = () => {
