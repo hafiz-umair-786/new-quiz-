@@ -38,52 +38,110 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const QUIZ_TIME_LIMIT = 15;
   const MAX_CHEATS = 3;
-  const alertSound = new Audio("audio/alert.mp3");
-  const timerSound = new Audio("audio/timer.mp3");
-  const wrongSound = new Audio(
-    "https://cdn.pixabay.com/download/audio/2022/02/11/audio_7f0bf4cdc0.mp3?filename=eritnhut1992-buzzer-or-wrong-answer-20582.mp3",
-  );
-  alertSound.loop = true;
-  timerSound.loop = true;
 
-  alertSound.volume = 0.5;
-  timerSound.volume = 0.5;
-  wrongSound.volume = 0.3;
-  // document.body.style.backgroundColor = "black";
+  const SoundManager = {
+    sounds: {
+      correct: new Audio("audio/correct-answer.mp3"),
+      wrong: new Audio("audio/wrong-answer.mp3"),
+      alert: new Audio("audio/alert.mp3"),
+      timer: new Audio("audio/timer.mp3"),
+    },
+
+    // Play a sound
+    play(name, autoPauseOthers = true) {
+      const sound = this.sounds[name];
+      if (!sound) return;
+
+      // Optional: pause all other sounds automatically
+      if (autoPauseOthers) this.stopAll(name);
+
+      sound.currentTime = 0;
+      sound.play().catch(() => {}); // avoid autoplay errors
+    },
+
+    // Pause a sound
+    pause(name) {
+      const sound = this.sounds[name];
+      if (!sound) return;
+      sound.pause();
+    },
+
+    // Stop all sounds (optional: except one)
+    stopAll(except = null) {
+      Object.keys(this.sounds).forEach((key) => {
+        if (key !== except) {
+          this.pause(key);
+        }
+      });
+    },
+  };
+
   let timer = null;
-  let currentTime = QUIZ_TIME_LIMIT;
+  let currentTime = 15;
+  let ticking = false;
   let currentQuestion = null;
   let quizCategory = null;
-  let isAnswered = false;
   let numberOfQuestions = 0;
   let correctCount = 0;
-  const askedQuestions = [];
   let cheatCount = 0;
-  tickingStarted = false;
+  let isAnswered = false;
+  const askedQuestions = [];
 
-  const resetTimer = () => {
+  function resetTimer() {
     clearInterval(timer);
-    currentTime = QUIZ_TIME_LIMIT;
+    currentTime = 15;
+    ticking = false;
     timerDisplay.textContent = `${currentTime}s`;
     timerDisplay.classList.remove("timer-blink");
     timerDisplay.style.color = "white";
-  };
-  const startTimer = () => {
+  }
+
+  function startTimer() {
     resetTimer();
     timer = setInterval(() => {
       currentTime--;
       timerDisplay.textContent = `${currentTime}s`;
-      checkTime(currentTime);
-      if (currentTime <= 5) {
+
+      if (currentTime <= 5 && !ticking) {
+        ticking = true;
+        SoundManager.play("alert");
         timerDisplay.classList.add("timer-blink");
         timerDisplay.style.color = "red";
       }
+
       if (currentTime <= 0) {
         clearInterval(timer);
-        if (!isAnswered) handleTimeUp();
+        ticking = false;
+        handleTimeUp();
       }
     }, 1000);
-  };
+  }
+
+  function resetQuizState() {
+    clearInterval(timer);
+    SoundManager.stopAll();
+
+    currentQuestion = null;
+    quizCategory = null;
+    numberOfQuestions = 0;
+    correctCount = 0;
+    cheatCount = 0;
+    isAnswered = false;
+    askedQuestions.length = 0;
+    ticking = false;
+
+    resetTimer();
+    hideExplanation();
+    showScreen("CONFIG");
+    requestAnimationFrame(() => startQuizBtn.focus());
+  }
+
+  function hideExplanation() {
+    whyBtn.style.display = "none";
+    explanationBox.style.display = "none";
+    explanationBox.innerHTML = "";
+  }
+
 
   const handleTimeUp = () => {
     isAnswered = true;
@@ -103,31 +161,11 @@ document.addEventListener("DOMContentLoaded", () => {
     timerDisplay.classList.remove("timer-blink");
     timerDisplay.style.color = "white";
   };
-  function checkTime(t) {
-    tickingStarted = false;
-
-    if (t <= 15 && t > 5 && !tickingStarted) {
-      tickingStarted = true;
-      timerSound.currentTime = 0;
-      timerSound.play().catch(() => {});
-    }
-
-    if (t <= 5 && t > 0) {
-      timerSound.pause();
-      alertSound.play().catch(() => {});
-    }
-
-    if (t === 0) {
-      tickingStarted = false;
-      alertSound.pause();
-    }
-  }
+  
   const renderQuestion = async () => {
-    whyBtn.style.display = "none";
-    whyBtn.style.display = "none";
-    explanationBox.style.display = "none";
-    explanationBox.innerHTML = "";
+    hideExplanation();
     try {
+      if (!response.ok) throw new Error("Network error");
       const response = await fetch("/api/quiz/next", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -139,7 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await response.json();
 
-      // Check if quiz finished
       if (data.finished || askedQuestions.length >= numberOfQuestions) {
         showScreen("RESULT");
         showResult();
@@ -148,19 +185,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       currentQuestion = { ...data };
 
-      // Track asked questions to avoid repetition
       if (data.originalIndex != null) {
         askedQuestions.push(data.originalIndex);
       }
       questionStatus.innerHTML = `${askedQuestions.length} / ${numberOfQuestions}`;
 
-      // ---- UI RENDERING ----
       questionText.textContent = currentQuestion.question;
 
-      // Clear previous options
       answerOptions.innerHTML = "";
 
-      // Shuffle options and render
       const shuffledOptions = shuffleArray(currentQuestion.options);
       shuffledOptions.forEach((opt) => {
         const li = document.createElement("li");
@@ -176,22 +209,38 @@ document.addEventListener("DOMContentLoaded", () => {
         answerOptions.appendChild(li);
       });
 
-      // Hide explanation box for new question
-      explanationBox.style.display = "none";
+      hideExplanation();
 
-      // Reset flags
       isAnswered = false;
       nextBtn.disabled = true;
 
-      // Enable Why button only if explanation exists
-
-      // Reset and start timer
       resetTimer();
       startTimer();
     } catch (err) {
       console.error("Error fetching next question:", err);
     }
   };
+  function playCorrectSound() {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    const gain = ctx.createGain();
+    gain.connect(ctx.destination);
+
+    gain.gain.setValueAtTime(0.001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(1, ctx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+
+    const notes = [523.25, 659.25, 783.99];
+
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      osc.type = "triangle";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.08);
+      osc.connect(gain);
+      osc.start(ctx.currentTime + i * 0.08);
+      osc.stop(ctx.currentTime + 0.6);
+    });
+  }
 
   const handleAnswer = (option) => {
     if (option.classList.contains("disabled") || isAnswered) return;
@@ -200,8 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const correct = selectedAnswer === currentQuestion.correctAnswer;
 
     try {
-      timerSound.pause();
-      alertSound.pause();
+      SoundManager.stopAll();
     } catch (err) {
       console.log("timerSound.pause() error:", err);
     }
@@ -224,13 +272,11 @@ document.addEventListener("DOMContentLoaded", () => {
     option.classList.add(correct ? "correct" : "incorrect");
 
     if (correct) {
-      // play correct sound
       playCorrectSound();
       correctCount++;
       disableOptions();
     } else if (!correct) {
-      // play wrong sound
-      wrongSound.play().catch((error) => {
+      SoundManager.play().catch((error) => {
         console.log("Wrong sound autoplay blocked.");
       });
       highlightCorrect();
@@ -244,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const highlightCorrect = () => {
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
       if (opt.dataset.answer === currentQuestion.correctAnswer) {
-        opt.classList.add("correct"); // highlight correct answer
+        opt.classList.add("correct");
         opt.insertAdjacentHTML(
           "beforeend",
           `<span class="material-symbols-outlined">check_circle</span>`,
@@ -272,14 +318,13 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const startQuiz = () => {
     disableRefresh();
-    askedQuestions.length = 0;
-    cheatCount = 0;
+    resetQuizState();
     showScreen("QUIZ");
 
     const activeCategoryBtn = configContainer.querySelector(
       ".category-option.active",
     );
-    quizCategory = activeCategoryBtn?.id; // <-- set quizCategor
+    quizCategory = activeCategoryBtn?.id;
 
     numberOfQuestions = parseInt(
       document.querySelector(".question-option.active").innerText,
@@ -315,14 +360,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     saveQuizHistory(correctCount, numberOfQuestions);
   };
-  const resetQuiz = () => {
-    showScreen("CONFIG");
-    correctCount = 0;
-    askedQuestions.length = 0;
-    requestAnimationFrame(() => {
-      startQuizBtn.focus();
-    });
-  };
+
   const SCREENS = {
     START: startBtn.parentNode,
     RULES: infoBox,
@@ -337,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (screen === SCREENS[screenName]) {
         screen.style.display = "block";
         if (screen.classList.contains("activeInfo")) {
-          screen.classList.add("activeInfo"); // keep rules active
+          screen.classList.add("activeInfo");
         }
       } else {
         screen.style.display = "none";
@@ -388,19 +426,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("quizHistory", JSON.stringify(history));
   }
-  const exitQuizAndRedirect = (url = "https://www.youtube.com/") => {
-    clearInterval(timer);
 
+  const exitQuizAndRedirect = (url = "https://www.youtube.com") => {
+    clearInterval(timer);
     location.href = url;
   };
-  // ==== Event listeners ====
+
   startBtn.addEventListener("click", () => {
-    showScreen("RULES"); // show the rules screen only
-    requestAnimationFrame(() => continueBtn.focus()); // focus the "Continue" button
+    showScreen("RULES");
+    requestAnimationFrame(() => continueBtn.focus());
   });
   continueBtn.addEventListener("click", () => {
-    showScreen("CONFIG"); // hide rules, show config
-    startQuizBtn.focus(); // focus the "Start Quiz" button
+    showScreen("CONFIG");
+    startQuizBtn.focus();
   });
   exitRulesBtn.addEventListener("click", () => {
     showScreen("START");
@@ -416,7 +454,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startBtn.focus();
   });
   nextBtn.addEventListener("click", renderQuestion);
-  // Toggle explanation visibility when button is clicked
+
   whyBtn.addEventListener("click", () => {
     if (
       explanationBox.style.display === "none" ||
@@ -425,13 +463,13 @@ document.addEventListener("DOMContentLoaded", () => {
       explanationBox.style.display = "block";
       explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
     } else {
-      explanationBox.style.display = "none";
+      hideExplanation();
     }
   });
 
-  tryAgainBtn.addEventListener("click", resetQuiz);
+  tryAgainBtn.addEventListener("click", resetQuizState);
   quitResultBtn.addEventListener("click", () =>
-    exitQuizAndRedirect("https://www.youtube.com/"),
+    exitQuizAndRedirect("https://www.youtube.com"),
   );
   openHistoryBtn.addEventListener("click", () => {
     showScreen("HISTORY");
@@ -442,7 +480,6 @@ document.addEventListener("DOMContentLoaded", () => {
     showScreen("RESULT");
   });
 
-  // ==== Config options setup ====
   const setupConfigOptions = () => {
     const categoryContainer = document.querySelector(".category-options");
     categoryContainer.querySelectorAll(".category-option").forEach((btn) => {
@@ -460,12 +497,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // code for cheat detection and handling
   function registerCheat(reason) {
     if (quizContainer.style.display !== "block") return;
-    wrongSound.pause();
-    alertSound.pause();
-    timerSound.pause();
+    SoundManager.play("wrong");
 
     cheatCount++;
     showWarning(`⚠️ Warning ${cheatCount}/${MAX_CHEATS}\n${reason}`);
@@ -488,8 +522,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function endQuizForCheating() {
-    timerSound.pause();
-    alertSound.pause();
     clearInterval(timer);
     showScreen("RESULT");
 
@@ -502,13 +534,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function showWarning(message) {
-    alert(message); // later you can replace with toast
+    alert(message);
   }
 
   let touchStart = 0;
-
-  // 1. Record where the touch start
-  //
 
   document.addEventListener(
     "touchstart",
@@ -518,7 +547,6 @@ document.addEventListener("DOMContentLoaded", () => {
     { passive: false },
   );
 
-  // 2. Detect the downward pull
   document.addEventListener(
     "touchmove",
     (e) => {
@@ -526,13 +554,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const touchCurrent = e.touches[0].pageY;
       const isAtTop = window.scrollY === 0;
 
-      // If pulling down while at the top of the page
       if (isAtTop && touchCurrent > touchStart + 50) {
-        e.preventDefault(); // Stop the actual reload
-        wrongSound.play();
+        e.preventDefault();
+        SoundManager.play("wrong");
         alert("Refresh is disabled on this page!");
 
-        // Reset touchStart so the alert doesn't loop infinitely
         touchStart = 999999;
       }
     },
@@ -540,28 +566,6 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   setupConfigOptions();
-  function playCorrectSound() {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-
-    const gain = ctx.createGain();
-    gain.connect(ctx.destination);
-    gain.gain.setValueAtTime(0.0001, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
-
-    const notes = [523.25, 659.25, 783.99];
-    // C5 → E5 → G5 (happy major chord)
-
-    notes.forEach((freq, i) => {
-      const osc = ctx.createOscillator();
-      osc.type = "sine";
-      osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
-      osc.connect(gain);
-      osc.start(ctx.currentTime + i * 0.1);
-      osc.stop(ctx.currentTime + 0.6);
-    });
-  }
-
   const getFocusableElements = () => {
     const elements = document.querySelectorAll(
       "button, [tabindex]:not([tabindex='-1']), .answer-option, .category-option, .question-option",
@@ -576,6 +580,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function enableRefresh() {
     document.documentElement.style.overscrollBehaviorY = "auto";
+  }
+  function navigateFocusable(key) {
+    const elements = getFocusableElements();
+    if (!elements.length) return;
+    const index = elements.indexOf(document.activeElement);
+    if (key === "j") elements[(index + 1) % elements.length].focus();
+    if (key === "k")
+      elements[(index - 1 + elements.length) % elements.length].focus();
   }
 
   document.addEventListener("keydown", (e) => {
@@ -594,27 +606,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const active = document.activeElement;
 
-    // ---- K/J navigation ----
-    if (e.key.toLowerCase() === "k" || e.key.toLowerCase() === "j") {
-      e.preventDefault();
-      const focusable = getFocusableElements();
-      if (!focusable.length) return;
-      const index = focusable.indexOf(active);
-      focusable[(index + 1) % focusable.length].focus();
-      return;
-    }
+    navigateFocusable(e.key.toLowerCase());
 
-    // ---- Enter key ----
     if (e.key !== "Enter") return;
     e.preventDefault();
 
-    // Quiz answers
     if (
       quizContainer.style.display === "block" &&
       active.classList.contains("answer-option")
     ) {
       try {
-        timerSound.pause();
+        SoundManager.pause("timer");
       } catch (err) {
         console.log("timerSound.pause() error:", err);
       }
@@ -622,13 +624,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Start screen
     if (startBtn.parentNode.style.display !== "none") {
       startBtn.click();
       return;
     }
 
-    // Info box
     if (infoBox.classList.contains("activeInfo")) {
       if (active === continueBtn) {
         continueBtn.click();
@@ -640,26 +640,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     if (getComputedStyle(resultContainer).display === "block") {
-      // If Start Quiz button is focused → start quiz
       if (active === startQuizBtn) {
         startQuizBtn.click();
         return;
       }
 
-      // If category option is focused → activate it
       if (active.classList.contains("category-option")) {
         active.click();
         return;
       }
 
-      // If question option is focused → activate it
       if (active.classList.contains("question-option")) {
         active.click();
         return;
       }
     }
 
-    // Result screen
     if (
       resultContainer.style.display === "block" &&
       (active === tryAgainBtn || active === quitResultBtn)
@@ -688,7 +684,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("contextmenu", (e) => {
     if (quizContainer.style.display === "block") {
       e.preventDefault();
-      alert("Right-click is disabled during the quiz.");
+      registerCheat("Right-click is disabled during the quiz.");
     }
   });
 
