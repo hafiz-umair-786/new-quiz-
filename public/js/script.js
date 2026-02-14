@@ -261,8 +261,8 @@ document.addEventListener("DOMContentLoaded", () => {
       correctCount++;
       disableOptions();
     } else {
-      SoundManager.play("wrong");
       highlightCorrect();
+      SoundManager.play("wrong");
       disableOptions();
     }
     if (currentQuestion.whyCorrect) {
@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const showResult = () => {
-    
+
     enableRefresh();
 
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
