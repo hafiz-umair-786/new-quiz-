@@ -47,12 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
       timer: new Audio("audio/timer.mp3"),
     },
 
-    
     play(name, autoPauseOthers = true) {
       const sound = this.sounds[name];
       if (!sound) return;
 
-  
       if (autoPauseOthers) this.stopAll(name);
 
       sound.currentTime = 0;
@@ -65,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
       sound.pause();
     },
 
-    
     stopAll(except = null) {
       Object.keys(this.sounds).forEach((key) => {
         if (key !== except) {
@@ -141,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
     explanationBox.innerHTML = "";
   }
 
-
   const handleTimeUp = () => {
     isAnswered = true;
     clearInterval(timer);
@@ -160,11 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
     timerDisplay.classList.remove("timer-blink");
     timerDisplay.style.color = "white";
   };
-  
+
   const renderQuestion = async () => {
     hideExplanation();
+
     try {
-      if (!response.ok) throw new Error("Network error");
       const response = await fetch("/api/quiz/next", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -173,6 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
           askedIds: askedQuestions,
         }),
       });
+
+      if (!response.ok) throw new Error("Network error");
 
       const data = await response.json();
 
@@ -187,8 +185,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.originalIndex != null) {
         askedQuestions.push(data.originalIndex);
       }
-      questionStatus.innerHTML = `${askedQuestions.length} / ${numberOfQuestions}`;
 
+      questionStatus.innerHTML = `${askedQuestions.length} / ${numberOfQuestions}`;
       questionText.textContent = currentQuestion.question;
 
       answerOptions.innerHTML = "";
@@ -205,10 +203,9 @@ document.addEventListener("DOMContentLoaded", () => {
           li.classList.add("active");
           handleAnswer(li);
         });
+
         answerOptions.appendChild(li);
       });
-
-      hideExplanation();
 
       isAnswered = false;
       nextBtn.disabled = true;
@@ -217,8 +214,10 @@ document.addEventListener("DOMContentLoaded", () => {
       startTimer();
     } catch (err) {
       console.error("Error fetching next question:", err);
+      alert("Failed to load question. Check your server.");
     }
   };
+
   function playCorrectSound() {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
 
@@ -275,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
       correctCount++;
       disableOptions();
     } else if (!correct) {
-      SoundManager.play().catch((error) => {
+      SoundManager.play("wrong").catch((error) => {
         console.log("Wrong sound autoplay blocked.");
       });
       highlightCorrect();
