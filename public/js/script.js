@@ -47,26 +47,25 @@ document.addEventListener("DOMContentLoaded", () => {
       timer: new Audio("audio/timer.mp3"),
     },
 
-    // Play a sound
+    
     play(name, autoPauseOthers = true) {
       const sound = this.sounds[name];
       if (!sound) return;
 
-      // Optional: pause all other sounds automatically
+  
       if (autoPauseOthers) this.stopAll(name);
 
       sound.currentTime = 0;
-      sound.play().catch(() => {}); // avoid autoplay errors
+      sound.play().catch(() => {});
     },
 
-    // Pause a sound
     pause(name) {
       const sound = this.sounds[name];
       if (!sound) return;
       sound.pause();
     },
 
-    // Stop all sounds (optional: except one)
+    
     stopAll(except = null) {
       Object.keys(this.sounds).forEach((key) => {
         if (key !== except) {
