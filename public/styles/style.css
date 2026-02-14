@@ -11,7 +11,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #007bff;
+    /* background: #007bff; */
+    background: #000; 
+    
 }
 
 body.modal-open {
@@ -1182,6 +1184,7 @@ button:focus-visible,
     color: white;
     background-color: #655f9c;
 }
+
 
 
 
