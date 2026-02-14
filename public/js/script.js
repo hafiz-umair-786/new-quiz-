@@ -251,10 +251,9 @@ document.addEventListener("DOMContentLoaded", () => {
     isAnswered = true;
     option.insertAdjacentHTML(
       "beforeend",
-      <span class="material-symbols-outlined">
-        ${correct ? "check_circle" : "cancel"}
-      </span>,
+      `<span class="material-symbols-outlined">${correct ? "check_circle" : "cancel"}</span>`,
     );
+
     option.classList.add(correct ? "correct" : "incorrect");
     if (correct) {
       playCorrectSound();
