@@ -466,9 +466,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // code for cheat detection and handling
   function registerCheat(reason) {
     if (quizContainer.style.display !== "block") return;
-    wrongSound.pause()
-    alertSound.pause()
-    timerSound.pause()
+    wrongSound.pause();
+    alertSound.pause();
+    timerSound.pause();
 
     cheatCount++;
     showWarning(`⚠️ Warning ${cheatCount}/${MAX_CHEATS}\n${reason}`);
@@ -511,7 +511,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let touchStart = 0;
 
   // 1. Record where the touch start
-  // 
+  //
 
   document.addEventListener(
     "touchstart",
@@ -669,7 +669,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("contextmenu", (e) => {
     if (quizContainer.style.display === "block") {
       e.preventDefault();
-      registerCheat("Right-click is disabled during the quiz.");
+      alert("Right-click is disabled during the quiz.");
     }
   });
 
