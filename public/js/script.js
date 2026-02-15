@@ -393,12 +393,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <td data-label="Total Questions">${item.total}</td>
       <td data-label="Percentage">${item.percent}%</td>
     `;
-
-
-
-
-    
-
       historyList.appendChild(row);
     });
   }
