@@ -517,6 +517,7 @@ document.addEventListener("DOMContentLoaded", () => {
     progressBar.style.width = "0%";
 
     tryAgainBtn.focus();
+    saveQuizHistory(0,numberOfQuestions)
   }
 
   function showWarning(message) {
