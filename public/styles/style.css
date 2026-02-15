@@ -50,6 +50,7 @@ button {
 }
 
 .explanation-box {
+    user-select: all;
     margin-top: 15px;
     padding: 12px 15px;
     background: #eef2ff;
