@@ -675,7 +675,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden && quizContainer.style.display === "block") {
+    if (document.hidden && quizContainer.style.display === "block" && !isAnswered) {
       registerCheat("You switched tabs during the quiz.");
     }
   });
