@@ -249,6 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(timer);
     nextBtn.disabled = false;
     nextBtn.focus();
+
     isAnswered = true;
     option.insertAdjacentHTML(
       "beforeend",
@@ -674,7 +675,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden && quizContainer.style.display === "block") {
+    if (document.hidden && quizContainer.style.display === "block" && questionText) {
       registerCheat("You switched tabs during the quiz.");
     }
   });
