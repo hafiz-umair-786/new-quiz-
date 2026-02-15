@@ -675,7 +675,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("visibilitychange", () => {
-    console.log("From visibility change because aanklasjhdkseh")
+    console.log("From visibility change because aanklasjhdkseh");
     if (document.hidden && quizContainer.style.display === "block" && questionText) {
       registerCheat("You switched tabs during the quiz.");
     }
