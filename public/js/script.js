@@ -484,7 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function registerCheat(reason) {
-    if (quizContainer.style.display !== "block") return;
+    if (quizContainer.style.display !== "block" && !questionText) return;
     SoundManager.play("wrong");
 
     cheatCount++;
@@ -670,11 +670,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("contextmenu", (e) => {
     if (quizContainer.style.display === "block") {
       e.preventDefault();
-      registerCheat("Right-click is disabled during the quiz.");
+      showWarning("Right-click is disabled during the quiz.");
     }
   });
 
   document.addEventListener("visibilitychange", () => {
+    console.log("From visibility change because aanklasjhdkseh")
     if (document.hidden && quizContainer.style.display === "block" && questionText) {
       registerCheat("You switched tabs during the quiz.");
     }
