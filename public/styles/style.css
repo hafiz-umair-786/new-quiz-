@@ -776,6 +776,10 @@ button:focus-visible,
 }
 
 @media (max-width:600px) {
+
+    .history-inst {
+        display: none !important;
+    }
     body {
         padding: 10px;
     }
@@ -950,6 +954,7 @@ button:focus-visible,
         transition: transform 0.3s ease;
     }
 
+
     @media screen and (orientation:portrait) {
         .quiz-history-container {
             transform: rotate(90deg);
@@ -962,9 +967,6 @@ button:focus-visible,
             margin-top: -50vw;
             margin-left: -50vh;
             overflow-y: auto;
-        }
-        .history-inst{
-            display: none;
         }
 
         body {
@@ -1140,7 +1142,7 @@ button:focus-visible,
             width: 100%;
             transition: transform 0.3s ease;
         }
-    }  
+    }
 }
 
 .quiz-content .answer-option.correct {
@@ -1175,9 +1177,12 @@ button:focus-visible,
     color: white;
     background-color: #655f9c;
 }
- 
-.history-inst{ 
+
+.history-inst {
     color: black;
     display: flex;
     justify-content: center;
+}
+.history-container{
+    display: block;
 }
