@@ -955,9 +955,7 @@ button:focus-visible,
 
 
     @media screen and (orientation:portrait) {
-        .history-inst {
-            display: none !important;
-        }
+        
 
         .quiz-history-container {
             transform: rotate(90deg);
@@ -1180,9 +1178,16 @@ button:focus-visible,
     color: white;
     background-color: #655f9c;
 }
-
 .history-inst {
     color: black;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+/* Hide ONLY when device is in portrait */
+@media screen and (orientation: portrait) {
+    .history-inst {
+        display: none;
+    }
 }
