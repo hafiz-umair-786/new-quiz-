@@ -767,8 +767,6 @@ button:focus-visible,
     font-size: 15px;
 }
 
-
-
 .quit-in-rules {
     background-color: #ff4d4d;
 }
@@ -782,6 +780,7 @@ button:focus-visible,
     .history-inst {
         display: none !important;
     }
+
     body {
         padding: 10px;
     }
@@ -1185,6 +1184,7 @@ button:focus-visible,
     display: flex;
     justify-content: center;
 }
-.history-container{
+
+.history-container {
     display: block;
 }
