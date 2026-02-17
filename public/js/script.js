@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   let timer = null;
-  let currentTime = 15;
+  let currentTime = QUIZ_TIME_LIMIT;
   let ticking = false;
   let currentQuestion = null;
   let quizCategory = null;
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function resetTimer() {
     clearInterval(timer);
-    currentTime = 15;
+    currentTime = QUIZ_TIME_LIMIT;
     ticking = false;
     timerDisplay.textContent = `${currentTime}s`;
     timerDisplay.classList.remove("timer-blink");

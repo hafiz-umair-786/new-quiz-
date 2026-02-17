@@ -963,6 +963,9 @@ button:focus-visible,
             margin-left: -50vh;
             overflow-y: auto;
         }
+        .history-inst{
+            display: none;
+        }
 
         body {
             padding: 10px;
@@ -1137,7 +1140,7 @@ button:focus-visible,
             width: 100%;
             transition: transform 0.3s ease;
         }
-    }
+    }  
 }
 
 .quiz-content .answer-option.correct {
@@ -1172,9 +1175,8 @@ button:focus-visible,
     color: white;
     background-color: #655f9c;
 }
-
-.history-inst{
-    all: unset;
+ 
+.history-inst{ 
     color: black;
     display: flex;
     justify-content: center;
