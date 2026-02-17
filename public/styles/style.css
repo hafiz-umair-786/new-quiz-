@@ -777,9 +777,7 @@ button:focus-visible,
 
 @media (max-width:600px) {
 
-    .history-inst {
-        display: none !important;
-    }
+
 
     body {
         padding: 10px;
@@ -957,6 +955,10 @@ button:focus-visible,
 
 
     @media screen and (orientation:portrait) {
+        .history-inst {
+            display: none !important;
+        }
+
         .quiz-history-container {
             transform: rotate(90deg);
             transform-origin: center center;
@@ -1183,8 +1185,4 @@ button:focus-visible,
     color: black;
     display: flex;
     justify-content: center;
-}
-
-.history-container {
-    display: block;
 }
