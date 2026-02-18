@@ -13,7 +13,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("back2.jpeg");
+    background-image: url("back.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
 }
