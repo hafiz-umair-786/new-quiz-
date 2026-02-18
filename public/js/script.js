@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const startBtn = document.querySelector(".start-btn button");
-  const infoBox = document.querySelector(".info-box");
-  const exitRulesBtn = infoBox.querySelector(".quit-in-rules");
-  const continueBtn = infoBox.querySelector(".restart");
+  const rulesContainer = document.querySelector(".rules-container");
+  const exitRulesBtn = rulesContainer.querySelector(".quit-in-rules");
+  const continueBtn = rulesContainer.querySelector(".restart");
 
   const configContainer = document.querySelector(".config-container");
   const exitConfigBtn = configContainer.querySelector(".quit-in-config");
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const SCREENS = {
     START: startBtn.parentNode,
-    RULES: infoBox,
+    RULES: rulesContainer,
     CONFIG: configContainer,
     QUIZ: quizContainer,
     RESULT: resultContainer,
@@ -615,7 +615,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    if (infoBox.classList.contains("activeInfo")) {
+    if (rulesContainer.classList.contains("activeInfo")) {
       if (active === continueBtn) {
         continueBtn.click();
         return;
