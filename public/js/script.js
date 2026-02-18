@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       resetTimer();
       startTimer();
-      SoundManager.play("timer")
+      SoundManager.play("timer");
     } catch (err) {
       console.error("Error fetching next question:", err);
       alert("Failed to load question. Check your server.");
@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
   const highlightCorrect = () => {
-    SoundManager.stopAll()
+    SoundManager.stopAll();
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
       if (opt.dataset.answer.trim() === currentQuestion.correctAnswer.trim()) {
         opt.classList.add("correct");
@@ -323,7 +323,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const showResult = () => {
-
     enableRefresh();
 
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
@@ -355,21 +354,26 @@ document.addEventListener("DOMContentLoaded", () => {
     RESULT: resultContainer,
     HISTORY: historyContainer,
   };
+  const DISPLAY_TYPES = {
+    START: "flex",
+    RULES: "block",
+    CONFIG: "block",
+    QUIZ: "block",
+    RESULT: "block",
+    HISTORY: "block",
+  };
 
   function showScreen(screenName) {
-    Object.values(SCREENS).forEach((screen) => {
-      if (screen === SCREENS[screenName]) {
-        screen.style.display = "block";
-        if (screen.classList.contains("activeInfo")) {
-          screen.classList.add("activeInfo");
-        }
+    Object.entries(SCREENS).forEach(([key, screen]) => {
+      if (key === screenName) {
+        screen.style.display = DISPLAY_TYPES[key];
+        screen.classList.add("activeInfo");
       } else {
         screen.style.display = "none";
         screen.classList.remove("activeInfo");
       }
     });
   }
-
   function loadQuizHistory() {
     const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
     historyList.innerHTML = "";
@@ -516,7 +520,7 @@ document.addEventListener("DOMContentLoaded", () => {
     progressBar.style.width = "0%";
 
     tryAgainBtn.focus();
-    saveQuizHistory(0,numberOfQuestions)
+    saveQuizHistory(0, numberOfQuestions);
   }
 
   function showWarning(message) {
@@ -675,7 +679,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden && quizContainer.style.display === "block" && !isAnswered) {
+    if (
+      document.hidden &&
+      quizContainer.style.display === "block" &&
+      !isAnswered
+    ) {
       registerCheat("You switched tabs during the quiz.");
     }
   });

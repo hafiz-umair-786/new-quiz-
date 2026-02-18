@@ -63,10 +63,21 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
     padding-bottom: 10px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    flex-direction: row;
+    gap: 15px;
 }
+
+@media (max-width: 600px) {
+    .start-btn {
+        flex-direction: column !important;
+    }
+}
+
 
 .start-btn button,
 .home-button-in-quiz {
@@ -89,7 +100,7 @@ button {
     transform: translateY(-3px);
     color: white;
     background: #4338ca;
- 
+
     box-shadow:
         inset 0 -1px 0 rgba(0, 0, 0, 0.06),
         0 14px 30px rgba(0, 0, 0, 0.2);
@@ -200,6 +211,9 @@ button {
     font-weight: 600;
     color: #007bff;
 }
+.quit-in-config{
+    border-radius: 30px !important;
+}
 
 .rules-container .buttons {
     height: 60px;
@@ -207,6 +221,14 @@ button {
     align-items: center;
     justify-content: flex-end;
     padding: 0 35px;
+    
+
+    border-radius: 30px !important;
+    
+
+
+   
+    
 }
 
 .rules-container .buttons button {
@@ -217,7 +239,7 @@ button {
     font-weight: 500;
     color: white;
 
-    border-radius: 6px;
+    border-radius: 30px !important;
 
     transition:
         background 0.3s ease,
@@ -290,13 +312,11 @@ button {
 
 .config-option button,
 .quit-in-config,
-.quit-in-rules {
+.quit-in-rules{
     padding: 12px;
     font-size: 0.938rem;
     font-weight: 500;
-
     border-radius: 6px;
-    border: 1px solid #5145ba;
 }
 
 .quit-in-config,
@@ -805,21 +825,75 @@ button:focus-visible,
     font-size: 15px;
 }
 
+
+
+.quit-in-config,
 .quit-in-rules {
     background-color: #ff4d4d;
+    color: white;
+    width: 100px;
+
 }
 
-.quit-in-rules:hover {
-    background-color: red;
+.start-quiz-btn,
+.restart {
+    background-color: #5145ba;
+    color: white;
+}
+
+.quit-in-config,
+.quit-in-rules,
+.start-quiz-btn,
+.restart {
+    width: 132px !important;
+    height: 55px !important;
+    font-size: large;
+    padding: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1;
+    border-radius: 6px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.start-quiz-btn,
+.restart {
+    background-color: #007bff;
+}
+
+.start-quiz-btn:hover,
+.restart:hover {
+    background-color: blue;
+}
+
+.quit-in-config,
+.quit-in-rules
+ {
+    background-color: rgb(156, 30, 30);
+}
+
+
+.result-buttons {
+    display: flex !important;
+    flex-direction: row;
+}
+
+.result-buttons button {
+    width: 100px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    padding: 12px !important;
+    height: 50px !important;
 }
 
 @media (max-width:600px) {
 
 
-
     body {
         padding: 10px;
     }
+
 
     .start-btn button {
         font-size: 20px;
@@ -881,67 +955,7 @@ button:focus-visible,
         width: 120px;
     }
 
-    .quit-in-config,
-    .quit-in-rules {
-        background-color: #ff4d4d;
-        color: white;
-        width: 100px;
-    }
 
-    .start-quiz-btn,
-    .restart {
-        background-color: #5145ba;
-        color: white;
-    }
-
-    .quit-in-config,
-    .quit-in-rules,
-    .start-quiz-btn,
-    .restart {
-        width: 132px !important;
-        height: 55px !important;
-        font-size: large;
-        padding: 0;
-        font-size: 0.95rem;
-        font-weight: 500;
-        line-height: 1;
-        border-radius: 6px;
-        text-align: center;
-        box-sizing: border-box;
-    }
-
-    .start-quiz-btn,
-    .restart {
-        background-color: #007bff;
-    }
-
-    .start-quiz-btn:hover,
-    .restart:hover {
-        background-color: blue;
-    }
-
-    .quit-in-config,
-    .quit-in-rules {
-        background-color: rgb(156, 30, 30);
-    }
-
-    .quit-in-config:hover,
-    .quit-in-rules:hover {
-        background-color: red;
-    }
-
-    .result-buttons {
-        display: flex !important;
-        flex-direction: row;
-    }
-
-    .result-buttons button {
-        width: 100px !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        padding: 12px !important;
-        height: 50px !important;
-    }
 
     .history-table-wrapper {
         overflow-x: auto;
@@ -1073,7 +1087,7 @@ button:focus-visible,
         }
 
         .quit-in-config,
-        .quit-in-rules {
+        .quit-in-rules{
             background-color: #ff4d4d;
             color: white;
             width: 100px;
@@ -1112,12 +1126,12 @@ button:focus-visible,
         }
 
         .quit-in-config,
-        .quit-in-rules {
+        .quit-in-rules{
             background-color: rgb(156, 30, 30);
         }
 
         .quit-in-config:hover,
-        .quit-in-rules:hover {
+        .quit-in-rules:hover{
             background-color: red;
         }
 
@@ -1257,7 +1271,8 @@ button:focus-visible,
 
 
 
-.action-buttons-in-config button {
+.action-buttons-in-config button
+{
     padding: 12px 28px;
 
     border-radius: 30px;
@@ -1270,18 +1285,21 @@ button:focus-visible,
     width: 150px;
 }
 
-.quit-in-config {
+.quit-in-config,
+.quit-in-rules{
     background: linear-gradient(135deg, #ef4444, #dc2626);
     color: white;
     box-shadow: 0 6px 18px rgba(220, 38, 38, 0.35);
 }
 
-.quit-in-config:hover {
+.quit-in-config:hover,
+.quit-in-rules:hover{
     transform: translateY(-3px);
     box-shadow: 0 10px 22px rgba(220, 38, 38, 0.45);
 }
 
-.quit-in-config:active {
+.quit-in-config:active,
+.quit-in-rules:active{
     transform: translateY(0);
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.25);
 }
@@ -1289,7 +1307,8 @@ button:focus-visible,
 
 
 
-.quit-in-config:hover {
+.quit-in-config:hover,
+.quit-in-rules{
     transform: translateY(-3px);
     box-shadow:
         0 10px 25px rgba(220, 38, 38, 0.45),
@@ -1322,7 +1341,7 @@ button:focus-visible,
 
 
 
-.quit-in-rules,
+
 .start-quiz-btn,
 .restart,
 .next-question-btn,
@@ -1342,9 +1361,10 @@ button:focus-visible,
 }
 
 
-.quit-in-rules,
+
 .restart,
-.action-buttons {
+.action-buttons,
+.quit-in-rules{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1360,4 +1380,69 @@ button:focus-visible,
     border-radius: 20px !important;
     padding: 13px 25px !important;
 
+}
+
+
+/* ===== Universal Rounded Buttons ===== */
+
+.start-quiz-btn,
+.restart,
+.next-question-btn,
+.open-history-btn,
+.delete-history,
+.try-again-btn,
+.quit-in-result,
+.quit-in-config,
+.quit-in-rules {
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+}
+
+/* Green Start */
+.start-quiz-btn {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+}
+
+.start-quiz-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.45);
+}
+
+/* Red Quit */
+.quit-in-config,
+.quit-in-rules,
+.quit-in-result {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
+
+.quit-in-config:hover,
+.quit-in-rules:hover,
+.quit-in-result:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.45);
+}
+
+/* Blue Next / Restart */
+.restart,
+.next-question-btn,
+.try-again-btn,
+.open-history-btn {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+.restart:hover,
+.next-question-btn:hover,
+.try-again-btn:hover,
+.open-history-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.45);
 }
