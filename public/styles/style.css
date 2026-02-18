@@ -465,6 +465,7 @@ button {
     border: 1px solid #b5acff;
     transition: 0.3s ease;
     margin-left: 0;
+    color: black;
 }
 
 .quiz-content .answer-option span {
@@ -1332,4 +1333,12 @@ button:focus-visible,
 
 .config-container button.active {
     background-color: #007bff;
+}
+
+.next-question-btn{
+    width: 100px !important;
+    height: 45px;
+    border-radius: 20px !important;
+    padding: 13px 25px !important;
+
 }
