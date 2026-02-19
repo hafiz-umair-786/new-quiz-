@@ -18,15 +18,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.answer-option.active {
-    background-color: #ffeaa7;
-    /* light yellow */
-    border: 2px solid #fdcb6e;
-    /* golden border */
-    color: #2d3436;
-    /* text color */
-    font-weight: 600;
-}
+
 
 
 body.modal-open {
@@ -1206,4 +1198,11 @@ button:focus-visible,
     background-color: #fab1a0;
     /* red for incorrect */
     border: 2px solid #d63031;
+}
+
+.answer-options .answer-option.active {
+    background-color: #ffeaa7 !important;
+    border: 2px solid #fdcb6e !important;
+    color: #2d3436 !important;
+    font-weight: 600 !important;
 }
