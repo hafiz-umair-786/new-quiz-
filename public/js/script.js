@@ -312,9 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showScreen("QUIZ");
 
     quizCategory = configContainer.querySelector(".category-option.active")?.id;
-    numberOfQuestions = parseInt(
-      document.querySelector(".question-option.active").innerText,
-    );
+    numberOfQuestions = parseInt(document.querySelector(".question-option.active").innerText,);
     quizCategoryShowInQuizContainer.innerHTML = `Chapter: ${configContainer.querySelector(".category-option.active")?.innerText || "Unknown"}`;
 
     askedQuestions = [];

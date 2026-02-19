@@ -1,5 +1,3 @@
-/* Basic Styling common */
-
 * {
     margin: 0;
     padding: 0;
@@ -27,8 +25,10 @@ body.modal-open {
     width: 100%;
 }
 
+.confirm-btn {
+    width: 95%;
+}
 
-/* animations */
 @keyframes blink {
 
     0%,
@@ -620,7 +620,7 @@ button:focus-visible,
 }
 
 .back-btn:hover {
-    /* background: rgba(255, 255, 255, 0.2); */
+
     transform: scale(1.05);
 }
 
@@ -1048,7 +1048,7 @@ button:focus-visible,
 
 
 
-/* ===== Universal Quit Button ===== */
+
 .quit {
     background: linear-gradient(135deg, #ef4444, #dc2626);
     color: #ffffff;
@@ -1075,44 +1075,19 @@ button:focus-visible,
         0 0 12px rgba(220, 38, 38, 0.25);
 }
 
-/* Click Effect */
+
 .quit:active {
     transform: translateY(0);
     box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Disabled State */
+
 .quit:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-.quiz-container {
-    display: block;
-}
-
-
-
-
-
-
-
-
-/* ===== Base Button Style ===== */
-
 
 .btn {
     display: inline-flex;
@@ -1122,22 +1097,18 @@ button:focus-visible,
     font-size: 0.9rem;
     border-radius: 25px;
     min-height: 40px;
-    /* 👈 Important */
+
     line-height: 1;
-    /* 👈 Prevents height mismatch */
+
 }
 
-/* Fixed size for primary and success buttons */
+
 .btn-primary,
 .btn-success {
     width: 160px !important;
-    /* fixed width */
     height: 45px !important;
-    /* fixed height */
     padding: 0 !important;
-    /* remove padding scaling */
     font-size: 1rem !important;
-    /* consistent font size */
     border-radius: 25px !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -1145,7 +1116,7 @@ button:focus-visible,
     line-height: 1 !important;
 }
 
-/* Hover effects remain */
+
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(59, 130, 246, 0.45);
@@ -1156,7 +1127,6 @@ button:focus-visible,
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(34, 197, 94, 0.45);
 }
-
 
 .btn-success {
     background: linear-gradient(135deg, #22c55e, #16a34a);
@@ -1190,13 +1160,13 @@ button:focus-visible,
 
 .answer-option.correct {
     background-color: #55efc4;
-    /* green for correct */
+
     border: 2px solid #00b894;
 }
 
 .answer-option.incorrect {
     background-color: #fab1a0;
-    /* red for incorrect */
+
     border: 2px solid #d63031;
 }
 
