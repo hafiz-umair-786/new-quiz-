@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
       osc.stop(ctx.currentTime + 0.6);
     });
   }
-  handleAnswer = (option) => {
+  const handleAnswer = (option) => {
     if (option.classList.contains("disabled") || isAnswered) return;
     const selectedAnswer = option.dataset.answer;
     const correct =
@@ -452,7 +452,7 @@ document.addEventListener("DOMContentLoaded", () => {
       explanationBox.style.display = "block";
       explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
     } else {
-      hideExplanation();
+      explanationBox.style.display = "none";
     }
   });
 
