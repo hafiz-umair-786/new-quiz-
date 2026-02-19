@@ -281,42 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /*** CONFIRM BUTTON ***/
-  confirmBtn.addEventListener("click", () => {
-    if (!selectedOption) return;
-
-    if (!isChecked) {
-      const correct =
-        selectedOption.dataset.answer.trim() ===
-        currentQuestion.correctAnswer.trim();
-
-      SoundManager.stopAll();
-      clearInterval(timer);
-      isAnswered = true;
-
-      selectedOption.classList.add(correct ? "correct" : "incorrect");
-      selectedOption.insertAdjacentHTML(
-        "beforeend",
-        `<span class="material-symbols-outlined">${correct ? "check_circle" : "cancel"}</span>`,
-      );
-
-      if (correct) {
-        playCorrectSound();
-        correctCount++;
-        hideExplanation(); // hide explanation if correct
-      } else {
-        highlightCorrect(); // highlight correct answer
-        SoundManager.play("wrong");
-
-        // **Always show explanation when wrong**
-        explanationBox.style.display = "block";
-        explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect || "No explanation provided."}`;
-      }
-
-      disableOptions();
-      confirmBtn.textContent = "Next";
-      isChecked = true;
-    }
-  });
+ 
   function disableRefresh() {
     document.documentElement.style.overscrollBehaviorY = "none";
   }
