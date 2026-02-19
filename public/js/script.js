@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let timer = null;
   let currentTime = QUIZ_TIME_LIMIT;
   let ticking = false;
+  let isquestionrendered = false;
 
   answerOptions.addEventListener("click", (e) => {
     const li = e.target.closest(".answer-option");
@@ -276,9 +277,11 @@ document.addEventListener("DOMContentLoaded", () => {
       resetTimer();
       startTimer();
       SoundManager.play("timer");
+      isquestionrendered = true
     } catch (err) {
       console.error("Error fetching question:", err);
       alert("Failed to load question. Check server.");
+      isquestionrendered = false
     }
   }
 
@@ -506,7 +509,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (
       document.hidden &&
       SCREENS.QUIZ.style.display === "block" &&
-      !isAnswered
+      isquestionrendered
     )
       registerCheat("Switched tab");
   });
