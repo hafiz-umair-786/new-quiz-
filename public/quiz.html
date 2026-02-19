@@ -28,14 +28,15 @@
   </head>
   <body>
     <div class="start-btn">
-      <button>Start Quiz</button>
-      <button class="home-button-in-quiz">
-        <a href="index.html">Go Back to Home Page </a>
+      <button class="btn btn-primary start-first">Start Quiz</button>
+      <button
+        class="btn btn-primary"
+        onclick="window.location.href = 'index.html'"
+      >
+        Go Back to Home Page
       </button>
-      <!-- <button class="home-button-in-quiz">Go Back to Home Page</button> -->
     </div>
     <div class="sections rules-container">
-      <!-- <button class="back-btn">←</button> -->
       <button class="back-btn">
         <span class="material-symbols-outlined">arrow_back</span>
       </button>
@@ -73,7 +74,7 @@
       </div>
       <div class="buttons">
         <button class="quit quit-in-rules">Exit Quiz</button>
-        <button class="restart">Continue</button>
+        <button class="btn btn-success restart">Continue</button>
       </div>
     </div>
     <div class="sections config-container">
@@ -105,7 +106,7 @@
       </div>
       <div class="action-buttons-in-config">
         <button class="quit quit-in-config">Exit?</button>
-        <button class="start-quiz-btn">Ready?</button>
+        <button class="btn btn-success start-quiz-btn">Ready?</button>
       </div>
     </div>
     <div class="sections quiz-container" style="display: none">
@@ -127,7 +128,7 @@
       <div class="quiz-footer">
         <p class="question-status"></p>
         <button class="WhyButton">Confused?</button>
-        <button disabled class="next-question-btn">
+        <button disabled class="btn btn-primary next-question-btn">
           Next<span class="material-symbols-outlined">arrow_right_alt</span>
         </button>
       </div>
@@ -143,9 +144,9 @@
         <div class="result-progress-fill"></div>
       </div>
       <div class="result-buttons">
-        <button class="open-history-btn">History</button>
-        <button class="try-again-btn">Try Again</button>
-        <button class="quit-in-result">Exit App?</button>
+        <button class="btn btn-primary open-history-btn">History</button>
+        <button class="btn btn-success try-again-btn">Try Again</button>
+        <button class="btn btn-success quit quit-in-result">Exit App?</button>
       </div>
     </div>
     <div class="sections history-container">
@@ -167,8 +168,8 @@
         </table>
       </div>
       <div class="buttons-of-history">
-        <button class="quit delete-history">Reset History</button>
-        <button class="close-history-btn start-quiz-btn">Close</button>
+        <button class="btn quit delete-history">Reset History</button>
+        <button class="btn btn-primary close-history-btn ">Close</button>
       </div>
       <p class="history-inst">
         Turn Auto rotate mode of your phone and then rotate your phone to 90
@@ -176,22 +177,7 @@
       </p>
     </div>
 
-    <script src="js/questions.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>
 
-<!-- make home page  -->
-<!-- make signup/login page  -->
-<!-- make admin pannel -->
-<!-- History only deletd by admin -->
-
-<!-- padding: 12px 28px !important; -->
-<!-- border-radius: 30px !important;
-    font-weight: 600 !important;
-    font-size: 0.95rem !important;
-    border: none !important;
-    cursor: pointer !important;
-    transition: all 0.25s ease !important;
-    letter-spacing: 0.3px !important;
-    width: 150px !important;  -->
