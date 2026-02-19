@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const confirmBtn = quizContainer.querySelector(".confirm-btn");
   const timerDisplay = quizContainer.querySelector(".time-duration");
   const questionStatus = quizContainer.querySelector(".question-status");
-  const whyBtn = quizContainer.querySelector(".WhyButton");
   const explanationBox = quizContainer.querySelector(".explanation-box");
 
   const resultContainer = document.querySelector(".result-container");
@@ -31,7 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const historyList = historyContainer.querySelector(".history-list");
   const closeHistoryBtn = historyContainer.querySelector(".close-history-btn");
   const deleteHistoryBtn = historyContainer.querySelector(".delete-history");
-  const quizCategoryShowInQuizContainer = document.querySelector("#option-display-in-quiz");
+  const quizCategoryShowInQuizContainer = document.querySelector(
+    "#option-display-in-quiz",
+  );
 
   /*** CONFIG ***/
   const QUIZ_TIME_LIMIT = 15;
@@ -79,8 +80,22 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   /*** SCREEN MANAGEMENT ***/
-  const SCREENS = { START: startBtn.parentNode, RULES: rulesContainer, CONFIG: configContainer, QUIZ: quizContainer, RESULT: resultContainer, HISTORY: historyContainer };
-  const DISPLAY_TYPES = { START: "flex", RULES: "block", CONFIG: "block", QUIZ: "block", RESULT: "block", HISTORY: "block" };
+  const SCREENS = {
+    START: startBtn.parentNode,
+    RULES: rulesContainer,
+    CONFIG: configContainer,
+    QUIZ: quizContainer,
+    RESULT: resultContainer,
+    HISTORY: historyContainer,
+  };
+  const DISPLAY_TYPES = {
+    START: "flex",
+    RULES: "block",
+    CONFIG: "block",
+    QUIZ: "block",
+    RESULT: "block",
+    HISTORY: "block",
+  };
   function showScreen(name) {
     Object.entries(SCREENS).forEach(([key, screen]) => {
       screen.style.display = key === name ? DISPLAY_TYPES[key] : "none";
@@ -121,7 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
     isAnswered = true;
     highlightCorrect();
     disableOptions();
-    whyBtn.style.visibility = currentQuestion.whyCorrect ? "visible" : "hidden";
     if (currentQuestion.whyCorrect) {
       explanationBox.style.display = "block";
       explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
@@ -150,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function hideExplanation() {
-    whyBtn.style.visibility = "hidden";
     explanationBox.style.display = "none";
     explanationBox.innerHTML = "";
   }
@@ -175,7 +188,11 @@ document.addEventListener("DOMContentLoaded", () => {
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
       if (opt.dataset.answer.trim() === currentQuestion.correctAnswer.trim()) {
         opt.classList.add("correct");
-        if (!opt.querySelector("span")) opt.insertAdjacentHTML("beforeend", `<span class="material-symbols-outlined">check_circle</span>`);
+        if (!opt.querySelector("span"))
+          opt.insertAdjacentHTML(
+            "beforeend",
+            `<span class="material-symbols-outlined">check_circle</span>`,
+          );
       }
     });
     timerDisplay.classList.remove("timer-blink");
@@ -211,7 +228,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch("/api/quiz/next", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category: quizCategory, askedIds: askedQuestions }),
+        body: JSON.stringify({
+          category: quizCategory,
+          askedIds: askedQuestions,
+        }),
       });
       if (!res.ok) throw new Error("Network error");
       const data = await res.json();
@@ -238,7 +258,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       isAnswered = false;
-      whyBtn.style.visibility = "hidden";
       resetTimer();
       startTimer();
       SoundManager.play("timer");
@@ -266,23 +285,32 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!selectedOption) return;
 
     if (!isChecked) {
-      const correct = selectedOption.dataset.answer.trim() === currentQuestion.correctAnswer.trim();
+      const correct =
+        selectedOption.dataset.answer.trim() ===
+        currentQuestion.correctAnswer.trim();
       SoundManager.stopAll();
       clearInterval(timer);
       isAnswered = true;
 
       selectedOption.classList.add(correct ? "correct" : "incorrect");
-      selectedOption.insertAdjacentHTML("beforeend", `<span class="material-symbols-outlined">${correct ? "check_circle" : "cancel"}</span>`);
+      selectedOption.insertAdjacentHTML(
+        "beforeend",
+        `<span class="material-symbols-outlined">${correct ? "check_circle" : "cancel"}</span>`,
+      );
 
-      if (correct) { playCorrectSound(); correctCount++; }
-      else { highlightCorrect(); SoundManager.play("wrong"); }
+      if (correct) {
+        playCorrectSound();
+        correctCount++;
+      } else {
+        highlightCorrect();
+        SoundManager.play("wrong");
+      }
 
       disableOptions();
 
       if (currentQuestion.whyCorrect) {
         explanationBox.style.display = "block";
         explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
-        whyBtn.style.visibility = "visible";
       }
 
       confirmBtn.textContent = "Next";
@@ -299,7 +327,9 @@ document.addEventListener("DOMContentLoaded", () => {
     showScreen("QUIZ");
 
     quizCategory = configContainer.querySelector(".category-option.active")?.id;
-    numberOfQuestions = parseInt(document.querySelector(".question-option.active").innerText);
+    numberOfQuestions = parseInt(
+      document.querySelector(".question-option.active").innerText,
+    );
     quizCategoryShowInQuizContainer.innerHTML = `Chapter: ${configContainer.querySelector(".category-option.active")?.innerText || "Unknown"}`;
 
     askedQuestions = [];
@@ -334,7 +364,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
     const percent = Math.round((score / total) * 100);
     const today = new Date().toLocaleDateString();
-    history.push({ score, total, percent, category: document.getElementById(quizCategory)?.innerText, date: today });
+    history.push({
+      score,
+      total,
+      percent,
+      category: document.getElementById(quizCategory)?.innerText,
+      date: today,
+    });
     localStorage.setItem("quizHistory", JSON.stringify(history));
   }
 
@@ -350,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
     history.forEach((item, i) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td data-label="Attempt">${i+1}</td>
+        <td data-label="Attempt">${i + 1}</td>
         <td data-label="Date">${item.date}</td>
         <td data-label="Quiz Category">${item.category}</td>
         <td data-label="Score">${item.score}</td>
@@ -362,14 +398,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /*** CONFIG OPTION SETUP ***/
   function setupConfigOptions() {
-    configContainer.querySelectorAll(".category-option").forEach(btn => btn.addEventListener("click", () => {
-      configContainer.querySelector(".category-option.active")?.classList.remove("active");
-      btn.classList.add("active");
-    }));
-    configContainer.querySelectorAll(".question-option").forEach(btn => btn.addEventListener("click", () => {
-      configContainer.querySelector(".question-option.active")?.classList.remove("active");
-      btn.classList.add("active");
-    }));
+    configContainer.querySelectorAll(".category-option").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        configContainer
+          .querySelector(".category-option.active")
+          ?.classList.remove("active");
+        btn.classList.add("active");
+      }),
+    );
+    configContainer.querySelectorAll(".question-option").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        configContainer
+          .querySelector(".question-option.active")
+          ?.classList.remove("active");
+        btn.classList.add("active");
+      }),
+    );
   }
 
   setupConfigOptions();
@@ -381,22 +425,73 @@ document.addEventListener("DOMContentLoaded", () => {
   startQuizBtn.addEventListener("click", startQuiz);
   exitConfigBtn.addEventListener("click", () => showScreen("RULES"));
   tryAgainBtn.addEventListener("click", resetQuizState);
-  quitResultBtn.addEventListener("click", () => location.href = "https://www.youtube.com");
-  openHistoryBtn.addEventListener("click", () => { showScreen("HISTORY"); loadQuizHistory(); });
+  quitResultBtn.addEventListener(
+    "click",
+    () => (location.href = "https://www.youtube.com"),
+  );
+  openHistoryBtn.addEventListener("click", () => {
+    showScreen("HISTORY");
+    loadQuizHistory();
+  });
   closeHistoryBtn.addEventListener("click", () => showScreen("RESULT"));
-  deleteHistoryBtn.addEventListener("click", () => { localStorage.removeItem("quizHistory"); loadQuizHistory(); });
+  deleteHistoryBtn.addEventListener("click", () => {
+    localStorage.removeItem("quizHistory");
+    loadQuizHistory();
+  });
 
-  whyBtn.addEventListener("click", () => {
-    explanationBox.style.display = explanationBox.style.display === "block" ? "none" : "block";
+  confirmBtn.addEventListener("click", () => {
+    if (!selectedOption) return;
+
+    if (!isChecked) {
+      // First click → Check answer
+      const correct =
+        selectedOption.dataset.answer.trim() ===
+        currentQuestion.correctAnswer.trim();
+
+      SoundManager.stopAll();
+      clearInterval(timer);
+      isAnswered = true;
+
+      selectedOption.classList.add(correct ? "correct" : "incorrect");
+      selectedOption.insertAdjacentHTML(
+        "beforeend",
+        `<span class="material-symbols-outlined">${
+          correct ? "check_circle" : "cancel"
+        }</span>`,
+      );
+
+      if (correct) {
+        playCorrectSound();
+        correctCount++;
+      } else {
+        highlightCorrect(); // still highlight correct answer
+        SoundManager.play("wrong");
+
+        // Show explanation automatically when answer is wrong
+        if (currentQuestion.whyCorrect) {
+          explanationBox.style.display = "block";
+          explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
+        }
+      }
+
+      disableOptions();
+      confirmBtn.textContent = "Next";
+      isChecked = true;
+    } else {
+      // Second click → Next question
+      renderQuestion();
+    }
   });
 
   /*** BACK BUTTONS ***/
-  document.querySelectorAll(".back-btn").forEach(btn => btn.addEventListener("click", () => {
-    if (SCREENS.RULES.style.display === "block") showScreen("START");
-    else if (SCREENS.CONFIG.style.display === "block") showScreen("RULES");
-    else if (SCREENS.RESULT.style.display === "block") showScreen("CONFIG");
-    else if (SCREENS.HISTORY.style.display === "block") showScreen("RESULT");
-  }));
+  document.querySelectorAll(".back-btn").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      if (SCREENS.RULES.style.display === "block") showScreen("START");
+      else if (SCREENS.CONFIG.style.display === "block") showScreen("RULES");
+      else if (SCREENS.RESULT.style.display === "block") showScreen("CONFIG");
+      else if (SCREENS.HISTORY.style.display === "block") showScreen("RESULT");
+    }),
+  );
 
   /*** CHEAT DETECTION ***/
   function registerCheat(reason) {
@@ -406,18 +501,37 @@ document.addEventListener("DOMContentLoaded", () => {
     if (cheatCount >= MAX_CHEATS) {
       clearInterval(timer);
       showScreen("RESULT");
-      resultMessage.innerHTML = "<b>Quiz Ended</b><br>You violated the quiz rules.";
+      resultMessage.innerHTML =
+        "<b>Quiz Ended</b><br>You violated the quiz rules.";
       scoreMessage.innerHTML = "Result: <b>Disqualified</b>";
       progressBar.style.width = "0%";
       saveQuizHistory(0, numberOfQuestions);
     }
   }
 
-  document.addEventListener("contextmenu", e => { if (SCREENS.QUIZ.style.display === "block") { e.preventDefault(); registerCheat("Right-click disabled"); } });
-  document.addEventListener("visibilitychange", () => { if (document.hidden && SCREENS.QUIZ.style.display === "block" && !isAnswered) registerCheat("Switched tab"); });
-  document.addEventListener("keydown", e => {
+  document.addEventListener("contextmenu", (e) => {
+    if (SCREENS.QUIZ.style.display === "block") {
+      e.preventDefault();
+      registerCheat("Right-click disabled");
+    }
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (
+      document.hidden &&
+      SCREENS.QUIZ.style.display === "block" &&
+      !isAnswered
+    )
+      registerCheat("Switched tab");
+  });
+  document.addEventListener("keydown", (e) => {
     if (SCREENS.QUIZ.style.display !== "block") return;
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "t") { e.preventDefault(); registerCheat("New tab not allowed"); }
-    if (e.ctrlKey && e.key.toLowerCase() === "r") { e.preventDefault(); alert("Refresh not allowed"); }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "t") {
+      e.preventDefault();
+      registerCheat("New tab not allowed");
+    }
+    if (e.ctrlKey && e.key.toLowerCase() === "r") {
+      e.preventDefault();
+      alert("Refresh not allowed");
+    }
   });
 });
