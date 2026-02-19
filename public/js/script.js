@@ -288,6 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const correct =
         selectedOption.dataset.answer.trim() ===
         currentQuestion.correctAnswer.trim();
+
       SoundManager.stopAll();
       clearInterval(timer);
       isAnswered = true;
@@ -301,22 +302,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (correct) {
         playCorrectSound();
         correctCount++;
+        hideExplanation(); // hide explanation if correct
       } else {
-        highlightCorrect();
+        highlightCorrect(); // highlight correct answer
         SoundManager.play("wrong");
+
+        // **Always show explanation when wrong**
+        explanationBox.style.display = "block";
+        explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect || "No explanation provided."}`;
       }
 
       disableOptions();
-
-      if (currentQuestion.whyCorrect) {
-        explanationBox.style.display = "block";
-        explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
-      }
-
       confirmBtn.textContent = "Next";
       isChecked = true;
-    } else {
-      renderQuestion();
     }
   });
   function disableRefresh() {
