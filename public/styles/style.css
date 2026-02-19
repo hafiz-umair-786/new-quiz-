@@ -1205,4 +1205,5 @@ button:focus-visible,
     border: 2px solid #fdcb6e !important;
     color: #2d3436 !important;
     font-weight: 600 !important;
+    border: 2px solid goldenrod;
 }
