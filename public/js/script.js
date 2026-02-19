@@ -319,6 +319,13 @@ document.addEventListener("DOMContentLoaded", () => {
       renderQuestion();
     }
   });
+  function disableRefresh() {
+    document.documentElement.style.overscrollBehaviorY = "none";
+  }
+
+  function enableRefresh() {
+    document.documentElement.style.overscrollBehaviorY = "auto";
+  }
 
   /*** START QUIZ ***/
   const startQuiz = () => {
