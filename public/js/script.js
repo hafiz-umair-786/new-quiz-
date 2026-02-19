@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  /*** SCREEN ELEMENTS ***/
   const startBtn = document.querySelector(".start-btn button");
   const rulesContainer = document.querySelector(".rules-container");
   const exitRulesBtn = rulesContainer.querySelector(".quit-in-rules");
@@ -34,11 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "#option-display-in-quiz",
   );
 
-  /*** CONFIG ***/
   const QUIZ_TIME_LIMIT = 15;
   const MAX_CHEATS = 3;
 
-  /*** STATE ***/
   let currentQuestion = null;
   let quizCategory = null;
   let numberOfQuestions = 0;
@@ -57,10 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = e.target.closest(".answer-option");
     if (!li || li.classList.contains("disabled")) return;
 
-    // Remove previous active
     answerOptions.querySelector(".active")?.classList.remove("active");
 
-    // Highlight the selected option
     li.classList.add("active");
 
     selectedOption = li;
@@ -68,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmBtn.textContent = "Check";
     isChecked = false;
   });
-  /*** SOUNDS ***/
   const SoundManager = {
     sounds: {
       correct: new Audio("audio/correct-answer.mp3"),
@@ -95,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   };
 
-  /*** SCREEN MANAGEMENT ***/
   const SCREENS = {
     START: startBtn.parentNode,
     RULES: rulesContainer,
@@ -119,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /*** TIMER ***/
   function resetTimer() {
     clearInterval(timer);
     currentTime = QUIZ_TIME_LIMIT;
@@ -156,12 +148,12 @@ document.addEventListener("DOMContentLoaded", () => {
       explanationBox.style.display = "block";
       explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
     }
-  };
-
-  /*** QUIZ FUNCTIONS ***/
-  function resetQuizState() {
-    clearInterval(timer);
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = "Next";
+    isChecked = true;
     SoundManager.stopAll();
+  };
+  function resetQuizState() {
     currentQuestion = null;
     quizCategory = null;
     numberOfQuestions = 0;
@@ -172,11 +164,13 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedOption = null;
     isChecked = false;
     ticking = false;
-
+    SoundManager.stopAll();
+    startQuizBtn.focus();
+    clearInterval(timer);
     resetTimer();
     hideExplanation();
+
     showScreen("CONFIG");
-    startQuizBtn.focus();
   }
 
   function hideExplanation() {
@@ -192,7 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return arr;
   }
-
   function disableOptions() {
     answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
       opt.style.pointerEvents = "none";
@@ -213,6 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     timerDisplay.classList.remove("timer-blink");
     timerDisplay.style.color = "white";
+    confirmBtn.textContent = "Next";
   }
 
   function playCorrectSound() {
@@ -231,8 +225,25 @@ document.addEventListener("DOMContentLoaded", () => {
       osc.stop(ctx.currentTime + 0.6);
     });
   }
+  function playWrongSound() {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const gain = ctx.createGain();
+    gain.connect(ctx.destination);
 
-  /*** RENDER QUESTION ***/
+    gain.gain.setValueAtTime(0.001, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(1, ctx.currentTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.6);
+
+    [330, 247, 196].forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
+      osc.connect(gain);
+      osc.start(ctx.currentTime + i * 0.1);
+      osc.stop(ctx.currentTime + 0.6);
+    });
+  }
+
   async function renderQuestion() {
     hideExplanation();
     selectedOption = null;
@@ -277,15 +288,15 @@ document.addEventListener("DOMContentLoaded", () => {
       resetTimer();
       startTimer();
       SoundManager.play("timer");
-      isquestionrendered = true
+      isquestionrendered = true;
+      enableOptions();
     } catch (err) {
       console.error("Error fetching question:", err);
       alert("Failed to load question. Check server.");
-      isquestionrendered = false
+      isquestionrendered = false;
     }
   }
 
-  /*** HANDLE ANSWER CLICK ***/
   answerOptions.addEventListener("click", (e) => {
     const li = e.target.closest(".answer-option");
     if (!li || li.classList.contains("disabled")) return;
@@ -298,8 +309,6 @@ document.addEventListener("DOMContentLoaded", () => {
     isChecked = false;
   });
 
-  /*** CONFIRM BUTTON ***/
-
   function disableRefresh() {
     document.documentElement.style.overscrollBehaviorY = "none";
   }
@@ -308,14 +317,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.documentElement.style.overscrollBehaviorY = "auto";
   }
 
-  /*** START QUIZ ***/
   const startQuiz = () => {
     disableRefresh();
     resetQuizState();
     showScreen("QUIZ");
 
     quizCategory = configContainer.querySelector(".category-option.active")?.id;
-    numberOfQuestions = parseInt(document.querySelector(".question-option.active").innerText,);
+    numberOfQuestions = parseInt(
+      document.querySelector(".question-option.active").innerText,
+    );
     quizCategoryShowInQuizContainer.innerHTML = `Chapter: ${configContainer.querySelector(".category-option.active")?.innerText || "Unknown"}`;
 
     askedQuestions = [];
@@ -323,7 +333,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderQuestion();
   };
 
-  /*** SHOW RESULTS ***/
   function showResult() {
     enableRefresh();
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
@@ -345,7 +354,6 @@ document.addEventListener("DOMContentLoaded", () => {
     saveQuizHistory(correctCount, numberOfQuestions);
   }
 
-  /*** HISTORY STORAGE ***/
   function saveQuizHistory(score, total) {
     const history = JSON.parse(localStorage.getItem("quizHistory")) || [];
     const percent = Math.round((score / total) * 100);
@@ -382,7 +390,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /*** CONFIG OPTION SETUP ***/
   function setupConfigOptions() {
     configContainer.querySelectorAll(".category-option").forEach((btn) =>
       btn.addEventListener("click", () => {
@@ -404,7 +411,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setupConfigOptions();
 
-  /*** BUTTON LISTENERS ***/
   startBtn.addEventListener("click", () => showScreen("RULES"));
   continueBtn.addEventListener("click", () => showScreen("CONFIG"));
   exitRulesBtn.addEventListener("click", () => showScreen("START"));
@@ -426,10 +432,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   confirmBtn.addEventListener("click", () => {
-    if (!selectedOption) return;
+    if (!isChecked && !selectedOption) return;
 
     if (!isChecked) {
-      // First click → Check answer
       const correct =
         selectedOption.dataset.answer.trim() ===
         currentQuestion.correctAnswer.trim();
@@ -454,10 +459,8 @@ document.addEventListener("DOMContentLoaded", () => {
           explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
         }
       } else {
-        highlightCorrect(); // still highlight correct answer
-        SoundManager.play("wrong");
-
-        // Show explanation automatically when answer is wrong
+        highlightCorrect();
+        playWrongSound();
         if (currentQuestion.whyCorrect) {
           explanationBox.style.display = "block";
           explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
@@ -468,12 +471,17 @@ document.addEventListener("DOMContentLoaded", () => {
       confirmBtn.textContent = "Next";
       isChecked = true;
     } else {
-      // Second click → Next question
       renderQuestion();
     }
   });
 
-  /*** BACK BUTTONS ***/
+  function enableOptions() {
+    answerOptions.querySelectorAll(".answer-option").forEach((opt) => {
+      opt.style.pointerEvents = "auto";
+      opt.classList.remove("disabled", "correct", "incorrect", "active");
+    });
+  }
+
   document.querySelectorAll(".back-btn").forEach((btn) =>
     btn.addEventListener("click", () => {
       if (SCREENS.RULES.style.display === "block") showScreen("START");
@@ -482,11 +490,9 @@ document.addEventListener("DOMContentLoaded", () => {
       else if (SCREENS.HISTORY.style.display === "block") showScreen("RESULT");
     }),
   );
-
-  /*** CHEAT DETECTION ***/
   function registerCheat(reason) {
     cheatCount++;
-    SoundManager.play("wrong");
+    SoundManager.play("wrong")
     alert(`⚠️ Warning ${cheatCount}/${MAX_CHEATS}\n${reason}`);
     if (cheatCount >= MAX_CHEATS) {
       clearInterval(timer);
