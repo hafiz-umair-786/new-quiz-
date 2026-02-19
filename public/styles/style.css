@@ -25,52 +25,6 @@ body.modal-open {
     width: 100%;
 }
 
-/* ===== Base Button Style ===== */
-
-.btn {
-    padding: 12px 28px;
-    border: none;
-    border-radius: 30px !important;
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.3px;
-    cursor: pointer;
-    transition: all 0.25s ease;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-success {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
-    color: #ffffff;
-}
-
-.btn-success:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.45);
-}
-
-.btn-primary {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: #ffffff;
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.45);
-}
-
-.btn-info {
-    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    color: #ffffff;
-}
-
-.btn-info:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.45);
-}
 
 /* animations */
 @keyframes blink {
@@ -119,8 +73,10 @@ body.modal-open {
     margin-top: 15px;
     padding: 12px 15px;
     background: #eef2ff;
+    color: #000;
     border-left: 4px solid #5145ba;
     border-radius: 6px;
+
     font-size: 0.95rem;
 }
 
@@ -792,7 +748,7 @@ button:focus-visible,
     .history-table th {
         background-color: #e9ecef;
         font-weight: 600;
-        
+
         text-align: left;
         padding: 12px 8px;
         white-space: nowrap;
@@ -824,6 +780,7 @@ button:focus-visible,
         width: 100%;
         transition: transform 0.3s ease;
     }
+
 
 
     @media screen and (orientation:portrait) {
@@ -896,7 +853,7 @@ button:focus-visible,
             padding: 15px;
         }
 
-        
+
 
 
         .start-quiz-btn,
@@ -943,7 +900,7 @@ button:focus-visible,
             height: 50px !important;
         }
 
-        .history-table-wrapper {
+        D .history-table-wrapper {
             overflow-x: auto;
             margin-bottom: 20px;
         }
@@ -1066,8 +1023,10 @@ button:focus-visible,
 
 
 
-.action-buttons-in-config{margin-top: 10px;
+.action-buttons-in-config {
+    margin-top: 10px;
 }
+
 .action-buttons-in-config button {
     padding: 12px 28px;
 
@@ -1088,7 +1047,6 @@ button:focus-visible,
 
 
 /* ===== Universal Quit Button ===== */
-
 .quit {
     background: linear-gradient(135deg, #ef4444, #dc2626);
     color: #ffffff;
@@ -1105,9 +1063,9 @@ button:focus-visible,
 
     cursor: pointer;
     transition: all 0.25s ease;
+    
 }
 
-/* Hover */
 .quit:hover {
     transform: translateY(-3px);
     box-shadow:
@@ -1129,3 +1087,94 @@ button:focus-visible,
     box-shadow: none;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Base Button Style ===== */
+
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    border-radius: 25px;
+    min-height: 40px;
+    /* 👈 Important */
+    line-height: 1;
+    /* 👈 Prevents height mismatch */
+}
+/* Fixed size for primary and success buttons */
+.btn-primary,
+.btn-success {
+    width: 160px !important;    /* fixed width */
+    height: 45px !important;    /* fixed height */
+    padding: 0 !important;      /* remove padding scaling */
+    font-size: 1rem !important; /* consistent font size */
+    border-radius: 25px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+}
+
+/* Hover effects remain */
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.45);
+    background-color: #403795;
+}
+
+.btn-success:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.45);
+}
+
+
+.btn-success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #ffffff;
+}
+
+.btn-success:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(34, 197, 94, 0.45);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.45);
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: #ffffff;
+}
+
+.btn-info:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(139, 92, 246, 0.45);
+}
