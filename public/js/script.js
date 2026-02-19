@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
       SoundManager.play("wrong");
       disableOptions();
     }
-    if (currentQuestion.whyCorrect) {
+    if (currentQuestion.whyCorrect && isAnswered) {
       whyBtn.style.display = "inline-flex";
     }
   };
