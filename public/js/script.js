@@ -52,6 +52,21 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentTime = QUIZ_TIME_LIMIT;
   let ticking = false;
 
+  answerOptions.addEventListener("click", (e) => {
+    const li = e.target.closest(".answer-option");
+    if (!li || li.classList.contains("disabled")) return;
+
+    // Remove previous active
+    answerOptions.querySelector(".active")?.classList.remove("active");
+
+    // Highlight the selected option
+    li.classList.add("active");
+
+    selectedOption = li;
+    confirmBtn.disabled = false;
+    confirmBtn.textContent = "Check";
+    isChecked = false;
+  });
   /*** SOUNDS ***/
   const SoundManager = {
     sounds: {
@@ -272,10 +287,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = e.target.closest(".answer-option");
     if (!li || li.classList.contains("disabled")) return;
 
-
-
-
-    
     answerOptions.querySelector(".active")?.classList.remove("active");
     li.classList.add("active");
     selectedOption = li;
@@ -285,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /*** CONFIRM BUTTON ***/
- 
+
   function disableRefresh() {
     document.documentElement.style.overscrollBehaviorY = "none";
   }
@@ -437,6 +448,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (correct) {
         playCorrectSound();
         correctCount++;
+        if (currentQuestion.whyCorrect) {
+          explanationBox.style.display = "block";
+          explanationBox.innerHTML = `<b>Why correct:</b><br>${currentQuestion.whyCorrect}`;
+        }
       } else {
         highlightCorrect(); // still highlight correct answer
         SoundManager.play("wrong");
