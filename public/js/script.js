@@ -272,6 +272,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const li = e.target.closest(".answer-option");
     if (!li || li.classList.contains("disabled")) return;
 
+
+
+
+    
     answerOptions.querySelector(".active")?.classList.remove("active");
     li.classList.add("active");
     selectedOption = li;
