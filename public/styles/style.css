@@ -1098,7 +1098,9 @@ button:focus-visible,
 
 
 
-
+.quiz-container{
+    display: block;
+}
 
 
 

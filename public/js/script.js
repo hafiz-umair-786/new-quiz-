@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function hideExplanation() {
-    whyBtn.style.display = "none";
+    whyBtn.style.visibility = "hidden";
     explanationBox.style.display = "none";
     explanationBox.innerHTML = "";
   }
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
     disableOptions();
     nextBtn.disabled = false;
     if (currentQuestion.whyCorrect) {
-      whyBtn.style.display = "inline-flex";
+      whyBtn.style.visibility = "visible";
     }
 
     if (currentQuestion.whyCorrect) {
@@ -208,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       isAnswered = false;
+      whyBtn.style.visibility = "hidden";
       nextBtn.disabled = true;
 
       resetTimer();
@@ -267,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
       disableOptions();
     }
     if (currentQuestion.whyCorrect && isAnswered) {
-      whyBtn.style.display = "inline-flex";
+      whyBtn.style.visibility = "visible";
     }
   };
   const highlightCorrect = () => {
