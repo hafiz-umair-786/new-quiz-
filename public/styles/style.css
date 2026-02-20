@@ -14,7 +14,7 @@ body {
     background-image: url("back.jpeg");
     background-size: cover;
     background-repeat: no-repeat;
-   
+
 }
 
 
@@ -53,15 +53,6 @@ body.modal-open {
         width: 100%;
     }
 }
-
-
-
-@media (max-width: 600px) {
-    .start-btn {
-        flex-direction: column !important;
-    }
-}
-
 
 
 
@@ -648,11 +639,6 @@ button:focus-visible,
     font-size: 15px;
 }
 
-
-
-
-
-
 .btn {
     padding: 10px 24px;
     font-size: 0.9rem;
@@ -677,6 +663,9 @@ button:focus-visible,
 
 @media (max-width:600px) {
 
+    .start-btn {
+        flex-direction: column !important;
+    }
 
     body {
         padding: 10px;
@@ -784,6 +773,13 @@ button:focus-visible,
         transition: transform 0.3s ease;
     }
 
+    .action-buttons-in-config{
+        display: flex;
+        flex-direction: row !important;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
 
 
     @media screen and (orientation:portrait) {
