@@ -543,6 +543,7 @@ body.modal-open {
     border: 1px solid white;
     padding: 10px;
     text-align: center;
+    color: white;
     vertical-align: middle;
     white-space: unset;
     word-break: break-word;
@@ -745,6 +746,7 @@ button:focus-visible,
     .history-table th {
         background-color: #e9ecef;
         font-weight: 600;
+        color: white;
 
         text-align: left;
         padding: 12px 8px;
@@ -922,6 +924,7 @@ button:focus-visible,
             font-weight: 600;
             text-align: left;
             padding: 12px 8px;
+            color: white;
             white-space: nowrap;
             border-bottom: 1px solid #ddd;
         }
