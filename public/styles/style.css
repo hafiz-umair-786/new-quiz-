@@ -515,8 +515,12 @@ body.modal-open {
     margin-bottom: 15px;
 }
 
-.buttons-of-history button {
-    width: fit-content;
+
+.result-buttons button {
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .history-table-wrapper {
@@ -540,7 +544,7 @@ body.modal-open {
     padding: 10px;
     text-align: center;
     vertical-align: middle;
-    white-space:unset;
+    white-space: unset;
     word-break: break-word;
 }
 
@@ -773,14 +777,15 @@ button:focus-visible,
         transition: transform 0.3s ease;
     }
 
-    .action-buttons-in-config{
+    .action-buttons-in-config {
         display: flex;
         flex-direction: row !important;
         align-items: center;
         justify-content: space-between;
         gap: 10px;
     }
-    .result-buttons{
+
+    .result-buttons {
         white-space: nowrap;
     }
 
@@ -914,7 +919,7 @@ button:focus-visible,
             font-size: 0.9rem;
         }
 
-        .history-table th { 
+        .history-table th {
             font-weight: 600;
             text-align: left;
             padding: 12px 8px;
