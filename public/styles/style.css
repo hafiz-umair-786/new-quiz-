@@ -551,6 +551,7 @@ body.modal-open {
 .history-table thead th {
     background-color: #32313c;
     border: 3px solid purple;
+    color: white;
     font-weight: bold;
 }
 
@@ -768,9 +769,7 @@ button:focus-visible,
         white-space: nowrap;
     }
 
-    .history-list tr:nth-child(even) {
-        background-color: #f9f9f9;
-    }
+    
 
     .quiz-history-container {
         width: 100%;
@@ -944,9 +943,7 @@ button:focus-visible,
             white-space: nowrap;
         }
 
-        .history-list tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+       
 
         .quiz-history-container {
             width: 100%;
