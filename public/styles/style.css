@@ -536,11 +536,11 @@ body.modal-open {
 
 .history-table th,
 .history-table td {
-    border: 1px solid #000;
+    border: 1px solid white;
     padding: 10px;
     text-align: center;
     vertical-align: middle;
-    white-space: normal;
+    white-space:unset;
     word-break: break-word;
 }
 
@@ -780,6 +780,9 @@ button:focus-visible,
         justify-content: space-between;
         gap: 10px;
     }
+    .result-buttons{
+        white-space: nowrap;
+    }
 
 
     @media screen and (orientation:portrait) {
@@ -911,8 +914,7 @@ button:focus-visible,
             font-size: 0.9rem;
         }
 
-        .history-table th {
-            background-color: #e9ecef;
+        .history-table th { 
             font-weight: 600;
             text-align: left;
             padding: 12px 8px;
@@ -924,7 +926,7 @@ button:focus-visible,
             padding: 12px 8px;
             vertical-align: middle;
             border-bottom: 1px solid #ddd;
-            color: #555;
+            color: white;
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: normal;
