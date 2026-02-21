@@ -1109,6 +1109,7 @@ button:focus-visible,
   word-wrap: nowrap;
 }
 
+
 .btn-primary,
 .btn-success {
     width: 160px !important;
@@ -1186,4 +1187,12 @@ button:focus-visible,
 
 .history-inst{
     color: white;
+}
+ .quit-in-rules{
+
+    height: 55px;       /* match restart button */
+    width: 132px;       /* match restart button */
+    font-size: 0.95rem; /* match restart button */
+    border-radius: 6px; /* match restart button */
+    box-sizing: border-box;
 }
