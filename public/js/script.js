@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   const SoundManager = {
     sounds: {
-      correct: new Audio("audio/correct-answer.mp3"),
       wrong: new Audio("audio/wrong-answer.mp3"),
       alert: new Audio("audio/alert.mp3"),
       timer: new Audio("audio/timer.mp3"),

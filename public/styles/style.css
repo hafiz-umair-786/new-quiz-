@@ -1057,18 +1057,7 @@ button:focus-visible,
     background: linear-gradient(135deg, #ef4444, #dc2626);
     color: #ffffff;
 
-    padding: 12px 28px;
-    width: 150px;
 
-    border: none;
-    border-radius: 30px;
-
-    font-weight: 600;
-    font-size: 0.95rem;
-    letter-spacing: 0.3px;
-
-    cursor: pointer;
-    transition: all 0.25s ease;
 
 }
 
@@ -1105,7 +1094,20 @@ button:focus-visible,
     line-height: 1;
 
 }
-
+.btn {
+  height: 48px;
+  padding: 0 28px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 48px;
+  word-wrap: nowrap;
+}
 
 .btn-primary,
 .btn-success {
@@ -1180,4 +1182,8 @@ button:focus-visible,
     color: #2d3436 !important;
     font-weight: 600 !important;
     border: 2px solid goldenrod;
+}
+
+.history-inst{
+    color: white;
 }
