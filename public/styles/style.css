@@ -19,7 +19,6 @@ body {
 
 
 
-
 body.modal-open {
     overflow: hidden;
     position: fixed;
@@ -669,10 +668,6 @@ button:focus-visible,
 
 @media (max-width:600px) {
 
-    .start-btn {
-        flex-direction: column !important;
-    }
-
     body {
         padding: 10px;
     }
@@ -771,7 +766,7 @@ button:focus-visible,
         white-space: nowrap;
     }
 
-    
+
 
     .quiz-history-container {
         width: 100%;
@@ -782,7 +777,7 @@ button:focus-visible,
         display: flex;
         flex-direction: row !important;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         gap: 10px;
     }
 
@@ -946,7 +941,7 @@ button:focus-visible,
             white-space: nowrap;
         }
 
-       
+
 
         .quiz-history-container {
             width: 100%;
@@ -1094,19 +1089,20 @@ button:focus-visible,
     line-height: 1;
 
 }
+
 .btn {
-  height: 48px;
-  padding: 0 28px;
-  border: none;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  min-height: 48px;
-  word-wrap: nowrap;
+    height: 48px;
+    padding: 0 28px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 48px;
+    word-wrap: nowrap;
 }
 
 
@@ -1185,14 +1181,35 @@ button:focus-visible,
     border: 2px solid goldenrod;
 }
 
-.history-inst{
+.history-inst {
     color: white;
 }
- .quit-in-rules{
 
-    height: 55px;       /* match restart button */
-    width: 132px;       /* match restart button */
-    font-size: 0.95rem; /* match restart button */
-    border-radius: 6px; /* match restart button */
+.quit-in-rules {
+    height: 55px;
+    width: 132px;
+    font-size: 0.95rem;
+    border-radius: 6px;
     box-sizing: border-box;
+}
+
+
+
+
+
+@media (max-width:500px) {
+
+    .start-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .action-buttons-in-config {
+        display: flex;
+        gap: 5px;
+    }
+    .rules-container{
+        text-wrap: nowrap;
+    }
 }

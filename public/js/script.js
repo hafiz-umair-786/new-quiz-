@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const startBtn = document.querySelector(".start-btn button");
+  const startBtn = document.querySelector(".start-btn-first");
   const rulesContainer = document.querySelector(".rules-container");
   const exitRulesBtn = rulesContainer.querySelector(".quit-in-rules");
   const continueBtn = rulesContainer.querySelector(".restart");
