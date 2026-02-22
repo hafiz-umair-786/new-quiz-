@@ -49,6 +49,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentTime = QUIZ_TIME_LIMIT;
   let ticking = false;
   let isquestionrendered = false;
+  let selectedAnswersByUser = []
+  let questions = []
 
   answerOptions.addEventListener("click", (e) => {
     const li = e.target.closest(".answer-option");
@@ -60,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     selectedOption = li;
     confirmBtn.disabled = false;
-    confirmBtn.textContent = "Check";
+    confirmBtn.textContent = "Submit";
     isChecked = false;
   });
   const SoundManager = {
@@ -272,6 +274,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.originalIndex != null) askedQuestions.push(data.originalIndex);
 
       questionStatus.textContent = `${askedQuestions.length} / ${numberOfQuestions}`;
+      console.log(
+        askedQuestions
+      )
       questionText.textContent = currentQuestion.question;
 
       answerOptions.innerHTML = "";
