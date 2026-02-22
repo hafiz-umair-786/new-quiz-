@@ -110,14 +110,8 @@ body.modal-open {
     left: 50%;
     transform: translate(-50%, -50%);
     padding-bottom: 10px;
-
-}
-
-
-.rules-container {
     display: none;
     width: 540px;
-    background-color: white;
     border-radius: 5px;
 }
 
@@ -1208,8 +1202,5 @@ button:focus-visible,
     .action-buttons-in-config {
         display: flex;
         gap: 5px;
-    }
-    .rules-container{
-        text-wrap: nowrap;
     }
 }
