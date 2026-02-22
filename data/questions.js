@@ -1405,4 +1405,3 @@ export default [
     ]
   }
 ];
-
