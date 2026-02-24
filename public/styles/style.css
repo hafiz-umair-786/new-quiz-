@@ -11,6 +11,7 @@ body {
     align-items: center;
     justify-content: center;
     background-image: url("back.jpeg");
+    background-color: transparent;
     background-size: cover;
     background-repeat: no-repeat;
 }
