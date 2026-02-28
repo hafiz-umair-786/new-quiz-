@@ -3,38 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz By Umair Ahmad</title>
-    <link rel="stylesheet" href="styles/style.css" />
+    <title>Pak Academy</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+    <link rel="manifest" href="images/site.webmanifest" />
     <style>
-      #start {
-        all: unset;
+      #start { 
         width: 100px;
         height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 20px;
-        font-weight: 800;
-        font-size: large;
         background: #4f46e5;
         color: white;
       }
       a {
         text-decoration: none;
         color: wheat;
+        margin-bottom: 0;
       }
       #start:hover {
-        font-size: x-large;
+        margin-bottom: 2px;
         background: #4338ca;
       }
     </style>
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
-  <body>
-    <div class="start-btn">
-      <button id="start"><a href="quiz.html">Quiz</a></button>
-    </div>
-    <script>
-      document.getElementById("start").addEventListener("click");
-    </script>
+  <body> 
+      <a id="start"  class="btn btn-primary" href="quiz.html">Quiz</a>
   </body>
 </html>

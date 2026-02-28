@@ -20,9 +20,6 @@ body.modal-open {
     position: fixed;
     width: 100%;
 }
-.confirm-btn {
-    width: 95%;
-}
 @keyframes blink {
     0%,
     50%,
@@ -41,40 +38,6 @@ body.modal-open {
     to {
         width: 100%;
     }
-}
-.explanation-box {
-    margin-top: 15px;
-    padding: 12px 15px;
-    background: #eef2ff;
-    color: #000;
-    border-left: 4px solid #5145ba;
-    border-radius: 6px;
-    font-size: 0.95rem;
-}
-.blink {
-    animation: blink 1s infinite;
-    color: red;
-    font-weight: 700;
-}
-.timer-blink {
-    animation-name: blink;
-    animation-iteration-count: infinite;
-    font-weight: 900;
-    animation-duration: 0.5s;
-}
-.progress-bar-container {
-    width: 100%;
-    height: 5px;
-    background: #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 5px;
-}
-.progress-bar-fill {
-    height: 100%;
-    width: 0%;
-    background: #5145ba;
-    transition: width 0.2s linear;
 }
 .rules-container {
     position: absolute;
@@ -155,8 +118,7 @@ body.modal-open {
     padding: 25px;
     text-align: center;
 }
-.config-container .config-title,
-.quiz-container .quiz-title {
+.config-container .config-title{
     font-size: 1.31rem;
 }
 .config-container .config-option {
@@ -200,9 +162,6 @@ body.modal-open {
 .question-options button {
     flex: 1 1 10%;
 }
-.quiz-container {
-    width: 480px;
-}
 .quiz-header-first-child-div {
     display: flex;
     flex-direction: column;
@@ -212,6 +171,13 @@ body.modal-open {
 }
 .quiz-header-first-child-div h3 {
     margin-top: 10px;
+}
+.quiz-container {
+    width: 480px;
+}
+.config-container .config-title,
+.quiz-container .quiz-title {
+    font-size: 1.31rem;
 }
 .quiz-container .quiz-header {
     display: flex;
@@ -934,6 +900,43 @@ button:focus-visible,
     font-size: 0.95rem;
     border-radius: 6px;
     box-sizing: border-box;
+}
+.confirm-btn {
+    width: 95%;
+}
+.explanation-box {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background: #eef2ff;
+    color: #000;
+    border-left: 4px solid #5145ba;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+.blink {
+    animation: blink 1s infinite;
+    color: red;
+    font-weight: 700;
+}
+.timer-blink {
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    font-weight: 900;
+    animation-duration: 0.5s;
+}
+.progress-bar-container {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #5145ba;
+    transition: width 0.2s linear;
 }
 @media (max-width:500px) {
     .start-btn {
