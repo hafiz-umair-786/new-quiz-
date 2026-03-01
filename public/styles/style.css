@@ -207,7 +207,7 @@ body.modal-open {
     font-size: 1.437rem;
     font-weight: 700;
 }
-.quiz-header .quiz-timer {
+.quiz-timer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -325,8 +325,6 @@ body.modal-open {
 }
 .time-duration {
     display: inline-block;
-    margin-top: 10px;
-    margin-left: 5px;
     font-weight: 600;
     color: white;
 }

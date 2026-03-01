@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 1000);
   }
   const handleTimeUp = () => {
+    if (!isquestionrendered) return;
     clearInterval(timer);
     ticking = false;
     disableOptions();
@@ -120,7 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmBtn.textContent = "Submit";
     SoundManager.stopAll();
     selectedAnswersByUser.push(null);
-    console.log(selectedAnswersByUser, askedQuestionIndex);
     renderQuestion();
   };
   function resetQuizState() {
@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resetTimer();
     hideExplanation();
     showScreen("CONFIG");
+    SoundManager.stopAll();
   }
   function hideExplanation() {
     explanationBox.style.display = "none";
@@ -234,6 +235,8 @@ document.addEventListener("DOMContentLoaded", () => {
     renderQuestion();
   };
   function showResult() {
+    SoundManager.stopAll();
+
     enableRefresh();
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
     openHistoryBtn.style.display = "inline-block";
@@ -244,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (percent >= 80) grade = "<b>B</b> Good!";
     else if (percent >= 70) grade = "<b>C</b> Fair!";
     else if (percent >= 60) grade = "<b>D</b> Needs practice!";
-    else if (percent >= 40) grade = "<b>D</b> More practice needed!";
+    else if (percent >= 40) grade = "<b>E</b> More practice needed!";
     else grade = "<b>F</b> Try again!";
     scoreMessage.innerHTML = `Grade: ${grade}`;
     tryAgainBtn.focus();
@@ -282,10 +285,10 @@ document.addEventListener("DOMContentLoaded", () => {
       historyList.appendChild(row);
     });
   }
-  let selectedOptionText = "";
+  
   function registerCheat(reason) {
-    cheatCount++;
-    SoundManager.play("wrong");
+    cheatCount++; 
+
     alert(`⚠️ Warning ${cheatCount}/${MAX_CHEATS}\n${reason}`);
     if (cheatCount >= MAX_CHEATS) {
       clearInterval(timer);
@@ -295,7 +298,12 @@ document.addEventListener("DOMContentLoaded", () => {
       scoreMessage.innerHTML = "Result: <b>Disqualified</b>";
       progressBar.style.width = "0%";
       saveQuizHistory(0, numberOfQuestions);
+      SoundManager.stopAll();
+      return;
     }
+    handleTimeUp();
+    
+    
   }
   function setupConfigOptions() {
     configContainer.querySelectorAll(".category-option").forEach((btn) =>
@@ -353,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (selectedOptionText === currentQuestion.correctAnswer) {
       correctCount++;
     }
-    SoundManager.stopAll();
+    
     clearInterval(timer); 
     renderQuestion();
   });
@@ -380,6 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
       isquestionrendered
     )
       registerCheat("Switched tab");
+      
   });
   document.addEventListener("keydown", (e) => {
     if (SCREENS.QUIZ.style.display !== "block") return;
