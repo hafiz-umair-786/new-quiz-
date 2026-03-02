@@ -236,7 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   function showResult() {
     SoundManager.stopAll();
-
     enableRefresh();
     const percent = Math.round((correctCount / numberOfQuestions) * 100);
     openHistoryBtn.style.display = "inline-block";
@@ -285,10 +284,8 @@ document.addEventListener("DOMContentLoaded", () => {
       historyList.appendChild(row);
     });
   }
-  
   function registerCheat(reason) {
-    cheatCount++; 
-
+    cheatCount++;
     alert(`⚠️ Warning ${cheatCount}/${MAX_CHEATS}\n${reason}`);
     if (cheatCount >= MAX_CHEATS) {
       clearInterval(timer);
@@ -302,8 +299,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     handleTimeUp();
-    
-    
   }
   function setupConfigOptions() {
     configContainer.querySelectorAll(".category-option").forEach((btn) =>
@@ -324,10 +319,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
   setupConfigOptions();
+  startQuizBtn.addEventListener("click", startQuiz);
   startBtn.addEventListener("click", () => showScreen("RULES"));
   continueBtn.addEventListener("click", () => showScreen("CONFIG"));
   exitRulesBtn.addEventListener("click", () => showScreen("START"));
-  startQuizBtn.addEventListener("click", startQuiz);
   exitConfigBtn.addEventListener("click", () => showScreen("RULES"));
   tryAgainBtn.addEventListener("click", resetQuizState);
   quitResultBtn.addEventListener(
@@ -357,12 +352,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!activeOption) return;
     const selectedOptionText = activeOption.textContent.trim();
     selectedAnswersByUser.push(selectedOptionText);
-
     if (selectedOptionText === currentQuestion.correctAnswer) {
       correctCount++;
     }
-    
-    clearInterval(timer); 
+    clearInterval(timer);
     renderQuestion();
   });
   document.querySelectorAll(".back-btn").forEach((btn) =>
@@ -388,7 +381,6 @@ document.addEventListener("DOMContentLoaded", () => {
       isquestionrendered
     )
       registerCheat("Switched tab");
-      
   });
   document.addEventListener("keydown", (e) => {
     if (SCREENS.QUIZ.style.display !== "block") return;
